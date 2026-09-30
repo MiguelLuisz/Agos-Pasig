@@ -38,13 +38,14 @@
   function route(){
     var h=(location.hash||'#home').slice(1);
     var onRiver=riverIds.indexOf(h)>-1;
-    var wasRiver=!river.hidden;
+    var prevPage=!river.hidden?'river':'home';
+    var page=onRiver?'river':'home';
     home.hidden=onRiver; river.hidden=!onRiver;
     var navKey=onRiver?'river':(h==='about'?'about':'home');
     document.querySelectorAll('[data-nav]').forEach(function(a){a.classList.toggle('active',a.dataset.nav===navKey)});
     links.classList.remove('open'); menuBtn.setAttribute('aria-expanded','false');
     var target=(h==='home'||h==='river')?null:document.getElementById(h);
-    var instant=wasRiver!==onRiver;
+    var instant=prevPage!==page;
     if(target){ target.scrollIntoView({behavior:instant?'instant':'smooth',block:'start'}); }
     else { window.scrollTo({top:0,behavior:instant?'instant':'smooth'}); }
   }
@@ -62,6 +63,13 @@
   setTimeout(showChip,50);
 
   window.addEventListener('hashchange',route);
+  var aboutEl=document.getElementById('about');
+  function homeSpy(){
+    if(home.hidden)return;
+    var key=aboutEl.getBoundingClientRect().top<=window.innerHeight*0.4?'about':'home';
+    document.querySelectorAll('[data-nav]').forEach(function(a){a.classList.toggle('active',a.dataset.nav===key)});
+  }
+  window.addEventListener('scroll',function(){requestAnimationFrame(homeSpy)},{passive:true});
   window.addEventListener('hashchange',showChip);
   // Clicking a link to the section you're already on still scrolls there
   document.addEventListener('click',function(e){
@@ -71,15 +79,7 @@
   // Close the phone menu on outside tap or Escape
   document.addEventListener('click',function(e){if(links.classList.contains('open')&&!e.target.closest('.nav')){links.classList.remove('open');menuBtn.setAttribute('aria-expanded','false');}});
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&links.classList.contains('open')){links.classList.remove('open');menuBtn.setAttribute('aria-expanded','false');menuBtn.focus();}});
-  // Home page: highlight About in the menu while the About section is on screen
-  var aboutEl=document.getElementById('about');
-  function homeSpy(){
-    if(home.hidden)return;
-    var r=aboutEl.getBoundingClientRect(), mid=window.innerHeight*0.4;
-    var key=(r.top<=mid&&r.bottom>mid)?'about':'home';
-    document.querySelectorAll('[data-nav]').forEach(function(a){a.classList.toggle('active',a.dataset.nav===key)});
-  }
-  window.addEventListener('scroll',function(){requestAnimationFrame(homeSpy)},{passive:true});
+
 
   // Scroll spy: light up the chip for the chapter on screen
   var chapters=['ch1','ch2','ch3','act'], current=null, ticking=false;
