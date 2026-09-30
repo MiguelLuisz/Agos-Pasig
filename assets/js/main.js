@@ -66,7 +66,8 @@
   var aboutEl=document.getElementById('about');
   function homeSpy(){
     if(home.hidden)return;
-    var key=aboutEl.getBoundingClientRect().top<=window.innerHeight*0.4?'about':'home';
+    var navH=document.querySelector('.nav').offsetHeight;
+    var key=aboutEl.getBoundingClientRect().top<=navH+120?'about':'home';
     document.querySelectorAll('[data-nav]').forEach(function(a){a.classList.toggle('active',a.dataset.nav===key)});
   }
   window.addEventListener('scroll',function(){requestAnimationFrame(homeSpy)},{passive:true});
