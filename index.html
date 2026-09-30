@@ -1,0 +1,915 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Agos Pasig: a student-led educational site on Pasig River water pollution, its causes, effects, and recovery.">
+<link rel="icon" type="image/png" href="img/logo.png">
+<title>Agos Pasig</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@1,600&family=Poppins:wght@600;700&display=swap">
+<style>
+img{max-width:100%}
+[hidden]{display:none!important}
+:root{
+  color-scheme: light;
+  --navy-900:#071a2c; --navy-800:#0b2740; --blue-700:#004f87; --blue-500:#2a7fc1;
+  --sky-100:#e6f0f8; --sky-50:#f4f8fb; --white:#ffffff;
+  --text:#14202b; --text-2:#4a5866; --inv:#ffffff; --inv-muted:#c9d6e3; --link-dark:#8cc7f5;
+  --border:#d5dee7; --good-bg:#e0f2e5; --good:#126b33; --bad-bg:#ffe8e0; --bad:#a8291a;
+  --display:"Poppins", "Segoe UI", system-ui, sans-serif;
+  --body:"Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --gutter:120px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important}}
+body{margin:0;background:var(--white);color:var(--text);font-family:var(--body);font-size:16px;line-height:26px;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+p{margin:0}
+h1,h2,h3{margin:0;font-family:var(--display);font-weight:600;text-wrap:balance}
+:focus-visible{outline:3px solid var(--blue-500);outline-offset:3px;border-radius:4px}
+
+.wrap{max-width:1440px;margin:0 auto;padding-inline:var(--gutter)}
+.overline{font:600 13px/16px var(--body);letter-spacing:1.2px;text-transform:uppercase;color:var(--blue-700)}
+.on-dark .overline{color:var(--inv-muted)}
+.h2{font-size:36px;line-height:44px;letter-spacing:-.25px}
+.h3{font-size:24px;line-height:32px}
+.lead{font-size:18px;line-height:28px;color:var(--text-2);max-width:680px}
+.muted{color:var(--text-2)}
+.caption{font-size:14px;line-height:20px;color:var(--text-2)}
+.src{font-size:14px;line-height:20px;color:var(--text-2)}
+.src b{font-weight:600;color:var(--blue-700)}
+.on-dark .src{color:var(--inv-muted)} .on-dark .src b{color:var(--link-dark)}
+
+.section{padding-block:96px}
+.section.tight{padding-block:80px}
+.bg-sky{background:var(--sky-50)}
+.on-dark{background:var(--navy-900);color:var(--inv)}
+.heading{display:flex;flex-direction:column;gap:12px;margin-bottom:48px;max-width:800px}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:64px}
+.split .col{display:flex;flex-direction:column;gap:16px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:48px;padding:0 24px;border-radius:8px;font:600 16px/20px var(--body);white-space:nowrap;transition:background .15s,color .15s;border:0;cursor:pointer;align-self:flex-start}
+.btn-light{background:var(--white);color:var(--text)} .btn-light:hover{background:var(--sky-100)}
+.btn-primary{background:var(--blue-700);color:var(--inv)} .btn-primary:hover{background:#003c68}
+
+/* Nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--navy-900);height:80px}
+.nav .wrap{height:100%;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:12px;background:none;border:0;padding:0;cursor:pointer;text-align:left}
+.brand-name{font:600 20px/24px var(--display);color:var(--inv);display:block}
+.brand-tag{font:400 12px/16px var(--body);color:var(--inv-muted);display:block}
+.links{display:flex;gap:32px}
+.links a{font:500 16px/20px var(--body);color:var(--inv-muted);padding:8px 0;border-bottom:2px solid transparent}
+.links a:hover{color:var(--inv)}
+.links a.active{color:var(--inv);font-weight:600;border-bottom-color:var(--blue-500)}
+.menu-btn{display:none;background:none;border:0;color:var(--inv);cursor:pointer;padding:8px;margin-right:-8px}
+
+/* Hero */
+.hero{position:relative;background:var(--navy-900);min-height:480px;display:flex;align-items:flex-end;overflow:hidden;color:var(--inv)}
+.hero.chapter{min-height:360px}
+.hero .photo{position:absolute;inset:0}
+.hero .scrim{position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,26,44,.92),rgba(7,26,44,.45))}
+.hero .wrap{position:relative;width:100%;padding-bottom:88px;padding-top:64px}
+.hero-content{display:flex;flex-direction:column;gap:16px;max-width:760px}
+.hero h1{font-weight:700;font-size:48px;line-height:56px;letter-spacing:-.5px}
+.hero .sub{font-size:18px;line-height:28px;max-width:620px}
+.hero .overline{color:var(--inv-muted)}
+.wave{position:absolute;left:0;right:0;bottom:-1px;height:40px;width:100%;display:block}
+
+/* Photo stand-ins */
+.ph{position:relative;overflow:hidden}
+.ph svg,.photo svg{position:absolute;inset:0;width:100%;height:100%}
+.photo img,.card .img img,.video img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.card .img{position:relative;overflow:hidden}
+.logo{width:48px;height:44px;object-fit:contain;flex:none}
+.ph-a{background:linear-gradient(180deg,#27465f 0%,#3f6a86 45%,#1c3a52 46%,#10283d 100%)}
+.ph-b{background:linear-gradient(180deg,#3a4a45 0%,#56665b 40%,#2d3a33 41%,#1d2823 100%)}
+.ph-c{background:linear-gradient(180deg,#5c7d96 0%,#9bb4c4 42%,#2f5670 43%,#173449 100%)}
+
+/* Cards */
+.card{background:var(--white);border:1px solid var(--border);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;transition:border-color .15s,box-shadow .15s}
+a.card:hover{border-color:var(--blue-500);box-shadow:0 6px 20px rgba(7,26,44,.08)}
+.card .img{height:216px}
+.card .body{padding:24px 24px 28px;display:flex;flex-direction:column;gap:12px}
+.card .more{font:600 14px/20px var(--body);color:var(--blue-700)}
+.box{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:28px;display:flex;flex-direction:column;gap:16px;transition:border-color .15s}
+a.box:hover{border-color:var(--blue-500)}
+
+/* Team */
+.member{display:flex;flex-direction:column;gap:12px}
+.avatar{width:96px;height:96px;border-radius:48px;background:var(--sky-100);border:2px solid var(--blue-700);display:grid;place-items:center;font:600 24px/32px var(--display);color:var(--blue-700)}
+.member .name{font:600 20px/28px var(--display)}
+.member .email{font-size:14px;line-height:20px;color:var(--blue-700);word-break:break-all;user-select:all}
+.member .role{font:600 13px/16px var(--body);letter-spacing:1.2px;text-transform:uppercase;color:var(--blue-700)}
+
+/* Sources */
+details.sources{border:1px solid var(--border);border-radius:12px;background:var(--white)}
+details.sources summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;padding:16px 24px}
+details.sources summary::-webkit-details-marker{display:none}
+details.sources summary .t{font:600 18px/24px var(--display)}
+details.sources summary .c{color:var(--text-2);margin-left:6px}
+details.sources summary svg{transition:transform .2s;flex:none}
+details.sources[open] summary svg{transform:rotate(180deg)}
+details.sources ol{margin:0;border-top:1px solid var(--border);padding:20px 24px 24px 24px;list-style:none;display:flex;flex-direction:column;gap:10px;font-size:15px;line-height:24px;color:var(--text-2)}
+details.sources li{padding-left:2em;text-indent:-2em;overflow-wrap:anywhere}
+details.sources li a{color:var(--blue-700)}
+details.sources li a:hover{text-decoration:underline}
+
+/* Footer */
+footer{background:var(--navy-900);color:var(--inv)}
+.foot{display:flex;flex-wrap:wrap;gap:64px;padding-top:80px;padding-bottom:64px}
+.foot .col{display:flex;flex-direction:column;gap:16px}
+.foot .overline{color:var(--inv-muted)}
+.foot a:not(.btn),.foot button.lnk{color:var(--inv);background:none;border:0;padding:0;font:inherit;cursor:pointer;text-align:left}
+.foot a:not(.btn):hover,.foot button.lnk:hover{text-decoration:underline}
+.foot a.btn-light{background:var(--white);color:var(--text)} .foot a.btn-light:hover{background:var(--sky-100);text-decoration:none}
+.foot .dim{color:var(--inv-muted)}
+.bottom{border-top:1px solid var(--navy-800)}
+.bottom .wrap{padding-block:24px;font-size:14px;line-height:20px;color:var(--inv-muted)}
+
+/* River: chapter bar */
+.chapbar{position:sticky;top:calc(env(safe-area-inset-top,0px) + 80px);z-index:10;background:var(--white);border-bottom:1px solid var(--border)}
+.chapbar{position:sticky}
+.chapbar .wrap{display:flex;gap:8px;padding-block:8px;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y;overscroll-behavior-x:contain;scroll-snap-type:x proximity;scroll-padding-inline:var(--gutter);cursor:grab}
+.chapbar .wrap::-webkit-scrollbar{display:none}
+.chapbar .wrap.dragging{cursor:grabbing;scroll-snap-type:none}
+.chapbar .wrap.dragging .chip{pointer-events:none}
+.chapbar .wrap::after{content:"";flex:0 0 calc(var(--gutter) - 8px)}
+.chapbar .chip{scroll-snap-align:start;user-select:none;-webkit-user-drag:none}
+.chapbar .fade{position:absolute;top:0;bottom:1px;width:40px;pointer-events:none;opacity:0;transition:opacity .2s}
+.chapbar .fade.l{left:0;background:linear-gradient(90deg,var(--white),rgba(255,255,255,0))}
+.chapbar .fade.r{right:0;background:linear-gradient(270deg,var(--white),rgba(255,255,255,0))}
+.chapbar .fade.on{opacity:1}
+.chip{flex:none;border:1px solid var(--border);border-radius:999px;padding:8px 14px;font:500 15px/20px var(--body);color:var(--text);background:var(--white);transition:background .15s,color .15s,border-color .15s}
+.chip:hover{background:var(--sky-100)}
+.chip.active{background:var(--blue-700);border-color:var(--blue-700);color:var(--inv)}
+[id]{scroll-margin-top:150px}
+
+/* Map */
+.map{border-radius:12px;overflow:hidden;border:1px solid var(--border);background:#eef3f7}
+.map svg{display:block;width:100%;height:auto}
+.map text{font-family:var(--body)}
+
+/* Timeline */
+.timeline{display:flex;flex-direction:column}
+.tl{display:grid;grid-template-columns:180px minmax(0,680px);gap:32px;padding-block:20px;border-top:1px solid var(--navy-800)}
+.tl:first-child{border-top:0}
+.tl .yr{font:600 24px/32px var(--display);color:var(--inv)}
+.tl p{font-size:18px;line-height:28px;color:var(--inv-muted)}
+.tl.key .yr{color:var(--link-dark)} .tl.key p{color:var(--inv)}
+
+/* Video */
+.video{display:block;position:relative;border-radius:12px;overflow:hidden;aspect-ratio:568/315;max-width:100%;background:#1a1f24}
+.video .play{position:absolute;inset:0;display:grid;place-items:center}
+.video .play span{width:84px;height:58px;border-radius:14px;background:#e0323c;display:grid;place-items:center;transition:transform .15s}
+.video:hover .play span{transform:scale(1.06)}
+.video .vt{position:absolute;left:24px;top:20px;right:24px;font:700 22px/28px var(--body);color:#fff}
+.video .vt small{display:block;font:500 14px/20px var(--body);color:#e8edf2}
+
+/* Causes */
+.cause .num{color:var(--blue-700)}
+.cause .h3{font-size:24px}
+.cause .kicker{font-size:18px;line-height:28px;color:var(--text)}
+.cause ul{margin:0;padding-left:24px;color:var(--text-2)}
+
+/* Effects table */
+.fx{display:grid;grid-template-columns:280px 1fr 200px;gap:48px;padding-block:28px;border-top:1px solid var(--navy-800)}
+.fx:first-child{border-top:0}
+.fx .k{font:600 24px/32px var(--display)}
+.fx .v strong{display:block;font:600 20px/28px var(--body);margin-bottom:8px}
+.fx .v p{color:var(--inv-muted)}
+a.fx:hover .v strong{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px}
+
+/* Charts */
+.chart{gap:20px}
+.chart .top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.chart .name{font:600 18px/26px var(--body)}
+.pill{flex:none;border-radius:999px;padding:4px 10px;font:600 16px/26px var(--body);font-variant-numeric:tabular-nums}
+.pill.good{background:var(--good-bg);color:var(--good)}
+.pill.bad{background:var(--bad-bg);color:var(--bad)}
+.bar-row{display:flex;flex-direction:column;gap:6px}
+.bar-row .lbl{display:flex;justify-content:space-between;align-items:baseline}
+.bar-row .lbl span:first-child{font-size:14px;line-height:20px;color:var(--text-2)}
+.bar-row .lbl span:last-child{font-weight:600;font-variant-numeric:tabular-nums}
+.track{height:20px;background:var(--sky-50);border-radius:4px;overflow:hidden}
+.track i{display:block;height:100%;border-radius:4px;background:var(--blue-700)}
+.track i.prev{background:var(--blue-500);opacity:.45}
+
+/* Findings */
+.find{display:flex;flex-direction:column;gap:8px}
+.find p.d{color:var(--inv-muted)}
+a.find:hover .h3{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:5px}
+
+/* Steps */
+.steps-card{border-radius:12px;padding:28px;display:flex;flex-direction:column;gap:16px}
+.steps-card.gov{background:var(--white);border:1px solid var(--border)}
+.steps-card.you{background:var(--sky-50);border:1px solid var(--border)}
+.steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:16px;counter-reset:s}
+.steps li{display:grid;grid-template-columns:36px 1fr;gap:16px;counter-increment:s}
+.steps li::before{content:counter(s);width:36px;height:36px;border-radius:18px;background:var(--blue-700);color:var(--inv);display:grid;place-items:center;font:600 16px/26px var(--body)}
+.steps strong{display:block;font:600 18px/26px var(--body)}
+.steps span{color:var(--text-2)}
+
+.project{background:#ecf4fb}
+.p-grid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr auto auto 1fr;grid-template-areas:"photo ." "photo head" "photo body" "photo .";column-gap:64px}
+.p-head{grid-area:head;display:flex;flex-direction:column;gap:12px;margin-bottom:16px}
+.p-photo{grid-area:photo;margin:0;display:flex;flex-direction:column;gap:16px;align-self:center}
+.p-body{grid-area:body;display:flex;flex-direction:column;gap:16px;font-size:18px;line-height:28px;color:var(--text-2)}
+.project-photo{width:100%;height:378px;object-fit:cover;border-radius:16px;display:block}
+.photo-credit{font-size:12px;line-height:16px;color:#667380}
+.pull{margin:0;border-left:4px solid var(--blue-700);padding:6px 0 6px 20px;font:italic 600 26px/1.35 "Playfair Display", Georgia, "Times New Roman", serif;color:var(--blue-700);text-wrap:balance}
+@media (max-width:820px){.p-grid{grid-template-columns:1fr;grid-template-rows:auto;grid-template-areas:"head" "photo" "body";row-gap:24px}.p-head{margin-bottom:0}.project-photo{height:auto;aspect-ratio:3/2}.pull{font-size:22px}}
+.page[hidden]{display:none}
+#about{scroll-margin-top:80px}
+.map-hint{display:none}
+@media (max-width:820px){
+  #about{scroll-margin-top:64px}
+  .map{overflow-x:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+  .map svg{width:760px;max-width:none}
+  .map-hint{display:block;margin-top:8px}
+}
+@media (min-width:600px) and (max-width:820px){
+  .wrap .grid-4,.wrap.grid-4{grid-template-columns:repeat(2,1fr)}
+}
+
+/* Responsive */
+@media (max-width:1100px){
+  :root{--gutter:48px}
+  .grid-4{grid-template-columns:repeat(2,1fr)}
+  .fx{grid-template-columns:200px 1fr;gap:12px 32px}
+  .fx .s{grid-column:2}
+}
+@media (max-width:820px){
+  :root{--gutter:20px}
+  .nav{height:64px}
+  .chapbar{top:calc(env(safe-area-inset-top,0px) + 64px)}
+  .menu-btn{display:block}
+  .links{display:none;position:absolute;top:64px;left:0;right:0;background:var(--navy-900);flex-direction:column;gap:0;padding:8px 20px 20px;border-top:1px solid var(--navy-800)}
+  .links.open{display:flex}
+  .links a{padding:14px 0;border-bottom:1px solid var(--navy-800)}
+  .links a.active{border-bottom-color:var(--navy-800);color:var(--link-dark)}
+  .hero{min-height:440px} .hero.chapter{min-height:340px}
+  .hero h1{font-size:34px;line-height:40px}
+  .hero .wrap{padding-bottom:72px}
+  .h2{font-size:28px;line-height:36px}
+  .h3{font-size:20px;line-height:28px}
+  .section{padding-block:64px} .section.tight{padding-block:56px}
+  .heading{margin-bottom:24px}
+  .split,.grid-3,.grid-4,.grid-2{grid-template-columns:1fr;gap:16px}
+  .split{gap:16px}
+  .box,.steps-card{padding:20px}
+  .tl{grid-template-columns:1fr;gap:4px;padding-block:14px}
+  .tl .yr{font-size:20px;line-height:28px}
+  .tl p{font-size:16px;line-height:26px}
+  .fx{grid-template-columns:1fr;gap:8px;padding-block:20px}
+  .fx .k{font-size:20px;line-height:28px} .fx .s{grid-column:auto}
+  .grid-4.team{gap:32px}
+  .foot{flex-direction:column;gap:40px;padding-top:56px}
+  [id]{scroll-margin-top:130px}
+}
+</style>
+</head>
+<body>
+<!-- Shared SVG symbols -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="logo" viewBox="0 0 48 44">
+      <path d="M24 2C24 2 9 18 9 27.5C9 36 15.7 42 24 42s15-6 15-14.5C39 18 24 2 24 2Z" fill="#2a7fc1"/>
+      <path d="M11.5 30c3.2-2.4 6.3-2.4 9.4 0s6.2 2.4 9.3 0 5.3-2.3 7.3-1.2" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/>
+      <path d="M13.5 35.5c2.7-2 5.4-2 8 0s5.4 2 8 0 4.4-1.9 5.8-1.1" fill="none" stroke="#c9d6e3" stroke-width="2" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="chev" viewBox="0 0 20 20"><path d="M5 7.5l5 5 5-5" fill="none" stroke="#004f87" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="skyline" viewBox="0 0 1440 480" preserveAspectRatio="xMidYMax slice">
+      <g fill="#0e2b44" opacity=".9">
+        <rect x="520" y="150" width="60" height="200"/><rect x="590" y="110" width="44" height="240"/><rect x="646" y="180" width="70" height="170"/>
+        <rect x="730" y="90" width="52" height="260"/><rect x="792" y="140" width="80" height="210"/><rect x="884" y="60" width="46" height="290"/>
+        <rect x="940" y="120" width="66" height="230"/><rect x="1016" y="170" width="54" height="180"/><rect x="1080" y="100" width="60" height="250"/>
+        <rect x="1150" y="150" width="84" height="200"/><rect x="1244" y="80" width="50" height="270"/><rect x="1304" y="130" width="72" height="220"/><rect x="1386" y="190" width="54" height="160"/>
+      </g>
+      <g fill="#1d4868" opacity=".8">
+        <rect x="560" y="230" width="70" height="120"/><rect x="700" y="210" width="90" height="140"/><rect x="860" y="240" width="60" height="110"/>
+        <rect x="1000" y="220" width="96" height="130"/><rect x="1180" y="235" width="80" height="115"/><rect x="1330" y="215" width="70" height="135"/>
+      </g>
+      <rect x="0" y="350" width="1440" height="130" fill="#123553"/>
+      <g stroke="#3f6f93" stroke-width="2" opacity=".6"><path d="M600 380h120M820 400h160M1060 372h110M1220 410h150M700 430h90M960 445h140"/></g>
+    </symbol>
+    <symbol id="debris" viewBox="0 0 1440 480" preserveAspectRatio="xMidYMid slice">
+      <rect width="1440" height="480" fill="#1b2a26"/>
+      <g fill="#3c4f47"><ellipse cx="300" cy="120" rx="240" ry="60"/><ellipse cx="1100" cy="90" rx="320" ry="70"/></g>
+      <g opacity=".75">
+        <rect x="620" y="250" width="200" height="54" rx="26" fill="#3e8a55" transform="rotate(-8 720 277)"/>
+        <rect x="440" y="230" width="150" height="60" rx="28" fill="#9fb2bd" transform="rotate(10 515 260)"/>
+        <rect x="920" y="200" width="120" height="70" rx="10" fill="#c8cfd2" transform="rotate(-14 980 235)"/>
+        <rect x="1140" y="270" width="160" height="80" rx="12" fill="#a8b4ba" transform="rotate(8 1220 310)"/>
+        <rect x="170" y="300" width="190" height="70" rx="12" fill="#bfc8cc" transform="rotate(-4 265 335)"/>
+        <circle cx="880" cy="340" r="30" fill="#d7dcde"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#home" aria-label="Agos Pasig home">
+      <img class="logo" src="img/logo.png" alt="">
+      <span><span class="brand-name">Agos Pasig</span><span class="brand-tag">Water • Life • Future</span></span>
+    </a>
+    <button class="menu-btn" id="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+      <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <nav class="links" id="nav-links">
+      <a href="#home" data-nav="home">Home</a>
+      <a href="#about" data-nav="about">About</a>
+      <a href="#river" data-nav="river">The River</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ================= HOME ================= -->
+<main class="page" id="page-home">
+  <section class="hero">
+    <div class="photo"><img fetchpriority="high" src="img/hero-home-1280.webp" srcset="img/hero-home-640.webp 640w, img/hero-home-1280.webp 1024w" sizes="100vw" decoding="async" style="background:#1d2a33 url(data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAACwAwCdASoUAAsAPu1iqk2ppaQiMAgBMB2JYwC/OCHEgukHR2TnUAD+1GUshKb245VgnotyDprEEoJaWolvdk5pMso0hU2tdQlcAAAA) center/cover" alt=""></div>
+    <div class="scrim"></div>
+    <div class="wrap">
+      <div class="hero-content">
+        <p class="overline">Water pollution in the Pasig River</p>
+        <h1>Understand the Pasig River. Help it recover.</h1>
+        <p class="sub">Learn what pollutes Metro Manila’s main river, what that pollution harms, and what the latest data says about its recovery.</p>
+        <a class="btn btn-light" href="#river">Start exploring <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+    <svg class="wave" viewBox="0 0 1440 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0 22C240 4 480 4 720 16s480 20 720 0V40H0Z" fill="#fff"/></svg>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="heading">
+        <p class="overline">How this site works</p>
+        <h2 class="h2">One river, three chapters</h2>
+        <p class="lead">The River page tells the story in three chapters. Read them in order, or jump to the one you need. Every figure is credited to a source.</p>
+      </div>
+      <div class="grid-3">
+        <a class="card" href="#ch1">
+          <div class="img"><img src="img/debris-1280.webp" srcset="img/debris-640.webp 640w, img/debris-1280.webp 1000w" sizes="(max-width:820px) 100vw, 384px" decoding="async" style="background:#1d2a33 url(data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAADwAwCdASoUAAsAPu1iqk4ppaQiMAgBMB2JYwCsACFnkMTmDpmtI+2AAP2zua+ezFcrywdQMhbi84eCzVKQifGp0Dj8+rZDOgAAAA==) center/cover" alt="Plastic bottles and foam containers floating in polluted water" loading="lazy"></div>
+          <div class="body">
+            <p class="overline">Chapter 1 · What it is</p>
+            <h3 class="h3">What is the Pasig River?</h3>
+            <p class="muted">Its size, route, and how it went from a lifeline to “biologically dead.”</p>
+            <p class="more">27 km · Read chapter 1 →</p>
+          </div>
+        </a>
+        <a class="card" href="#ch2">
+          <div class="img"><img src="img/smoke-640.webp" srcset="img/smoke-640.webp 626w" sizes="(max-width:820px) 100vw, 384px" decoding="async" style="background:#1d2a33 url(data:image/webp;base64,UklGRk4AAABXRUJQVlA4IEIAAADwAwCdASoUAAwAPu1oqk6ppiQiMAgBMB2JZQCdAB9fEXRayekqqMtAAMz1qNH5uI52sml2jR68Ku0RG1JuYYTlgAA=) center/cover" alt="A child stands on a garbage-covered shore under industrial smoke" loading="lazy"></div>
+          <div class="body">
+            <p class="overline">Chapter 2 · The problem</p>
+            <h3 class="h3">What pollutes it, and what does that harm?</h3>
+            <p class="muted">The four main sources of pollution and their effects on wildlife, people, and Manila Bay.</p>
+            <p class="more">65% from households · Read chapter 2 →</p>
+          </div>
+        </a>
+        <a class="card" href="#ch3">
+          <div class="img"><img src="img/skyline-1280.webp" srcset="img/skyline-640.webp 640w, img/skyline-1280.webp 1199w" sizes="(max-width:820px) 100vw, 384px" decoding="async" style="background:#1d2a33 url(data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAAAQBACdASoUAA4APu1iqk2ppaQiMAgBMB2JZQCdIAeB+pTyXSfXKnhtAACxScq/2J+9LdB6D1XU0x3vsQEPs1dG5PG874f0Li/ypgAA) center/cover" alt="Buildings along the Pasig River reflected in the water" loading="lazy"></div>
+          <div class="body">
+            <p class="overline">Chapter 3 · Progress</p>
+            <h3 class="h3">Is it getting better?</h3>
+            <p class="muted">The latest water-quality data, what is being done, and what you can do.</p>
+            <p class="more">−43% fecal coliform · Read chapter 3 →</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tight on-dark">
+    <div class="wrap split">
+      <div class="col">
+        <p class="overline">Why it matters</p>
+        <h2 class="h2">Progress does not mean full recovery</h2>
+      </div>
+      <div class="col">
+        <p style="font-size:18px;line-height:28px">The river is cleaner in some ways than it was in 1990, when it was declared biologically dead. But in 2025, some water-quality indicators still got worse.</p>
+        <a class="btn btn-light" href="#ch3">See the latest data <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section project" id="about">
+    <div class="wrap p-grid">
+      <div class="p-head">
+        <p class="overline">About the project</p>
+        <h2 class="h2">Why we made this site</h2>
+      </div>
+      <figure class="p-photo">
+        <img class="project-photo" src="img/guadalupe-1280.webp" srcset="img/guadalupe-640.webp 640w, img/guadalupe-1280.webp 1280w" sizes="(max-width:820px) 100vw, 568px" decoding="async" style="background:#1d2a33 url(data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAADQAwCdASoUAA0APu1krU2ppaSiMAgBMB2JZQC7ACHoD/U3sOY6u5AAyz6Um4Zb6y+uGRHLB5Ivbv/O+rMUxTV/SdgS/uVW1SAAAA==) center/cover" alt="Aerial view of Guadalupe Bridge crossing the Pasig River, with Makati high-rises behind it" loading="lazy">
+        <figcaption class="photo-credit">Guadalupe Bridge over the Pasig River. Photo: Getty Images via Tatler Asia</figcaption>
+      </figure>
+      <div class="p-body">
+        <p><strong style="font-weight:600">Agos</strong> means “flow” in Filipino. We chose it because the Pasig River’s future depends on what flows into it, from homes, factories, and streets across Metro Manila.</p>
+        <p>The Pasig River is a 27-kilometer river at the heart of Manila’s history. Decades of urbanization polluted it, but it is slowly recovering. Agos Pasig is a student project that explains its story and shows how communities can help restore it.</p>
+        <blockquote class="pull">We believe nature and urban progress can coexist, and the Pasig River can prove it.</blockquote>
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-sky">
+    <div class="wrap">
+      <div class="heading">
+        <p class="overline">How we handle facts</p>
+        <h2 class="h2">Our approach</h2>
+      </div>
+      <div class="grid-3">
+        <div class="box"><h3 class="h3">Sourced figures only</h3><p class="muted">Every number is credited to a source, listed in the Sources bar at the bottom of its page.</p></div>
+        <div class="box"><h3 class="h3">Official data first</h3><p class="muted">We rely on DENR, ADB, and peer-reviewed studies wherever possible.</p></div>
+        <div class="box"><h3 class="h3">Disputed claims are labeled</h3><p class="muted">When a finding is contested, like the 2021 ocean-plastic ranking, we say so.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="heading">
+        <p class="overline">The team</p>
+        <h2 class="h2">Meet the team</h2>
+        <p class="lead">Questions or corrections? Email any of us.</p>
+      </div>
+      <div class="grid-4 team">
+        <div class="member"><div class="avatar">MA</div><p class="name">Miguel Luis Arocena</p><p class="email">lr.mlarocena@mmdc.mcl.edu.ph</p><p class="role" style="line-height:22px">UI/UX design and<br>web development</p><p class="muted">Designs the interface and builds the website.</p></div>
+        <div class="member"><div class="avatar">TI</div><p class="name">Tracie Andrei Ignacio</p><p class="email">lr.taignacio@mmdc.mcl.edu.ph</p><p class="role">UI/UX design</p><p class="muted">Designs the layouts and navigation so the site is easy to use.</p></div>
+        <div class="member"><div class="avatar">MI</div><p class="name">Mica Ella Jane Isidro</p><p class="email">lr.mejisidro@mmdc.mcl.edu.ph</p><p class="role">Content and research</p><p class="muted">Researches and writes about the river’s history and recovery.</p></div>
+        <div class="member"><div class="avatar">ND</div><p class="name">Nikki Diane Rabano</p><p class="email">lr.ndrabano@mmdc.mcl.edu.ph</p><p class="role">Content and research</p><p class="muted">Researches and writes about the causes and effects of pollution.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-block:48px 96px">
+    <div class="wrap">
+      <details class="sources">
+        <summary><span><span class="t">Sources</span><span class="c">(2)</span></span><svg width="20" height="20" aria-hidden="true"><use href="#chev"/></svg></summary>
+        <ol class="src-list" data-list="home"></ol>
+      </details>
+    </div>
+  </section>
+</main>
+
+<!-- ================= THE RIVER ================= -->
+<main class="page" id="page-river" hidden>
+  <section class="hero">
+    <div class="photo"><img src="img/debris-1280.webp" srcset="img/debris-640.webp 640w, img/debris-1280.webp 1000w" sizes="100vw" decoding="async" style="background:#1d2a33 url(data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAADwAwCdASoUAAsAPu1iqk4ppaQiMAgBMB2JYwCsACFnkMTmDpmtI+2AAP2zua+ezFcrywdQMhbi84eCzVKQifGp0Dj8+rZDOgAAAA==) center/cover" alt=""></div>
+    <div class="scrim"></div>
+    <div class="wrap">
+      <div class="hero-content">
+        <p class="overline">The River</p>
+        <h1>The Pasig River story</h1>
+        <p class="sub">Three chapters: what the river is, what is wrong with it, and whether it is recovering.</p>
+      </div>
+    </div>
+    <svg class="wave" viewBox="0 0 1440 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0 22C240 4 480 4 720 16s480 20 720 0V40H0Z" fill="#fff"/></svg>
+  </section>
+
+  <div class="chapbar">
+    <div class="wrap">
+      <a class="chip" href="#ch1" data-chip="ch1">1 · What it is</a>
+      <a class="chip" href="#ch2" data-chip="ch2">2 · The problem</a>
+      <a class="chip" href="#ch3" data-chip="ch3">3 · Progress</a>
+      <a class="chip" href="#act" data-chip="act">What you can do</a>
+    </div>
+    <span class="fade l" aria-hidden="true"></span><span class="fade r" aria-hidden="true"></span>
+  </div>
+
+  <!-- Chapter 1 -->
+  <section class="section" id="ch1">
+    <div class="wrap">
+      <div class="heading">
+        <p class="overline">Chapter 1 of 3 · What it is</p>
+        <h2 class="h2">What is the Pasig River?</h2>
+        <p class="lead">The river links Laguna de Bay to Manila Bay. Its location makes it important at both a national and regional level.</p>
+      </div>
+      <div class="grid-4">
+        <a class="box" href="https://www.adb.org/results/country-water-action-resuscitating-pasig-river" target="_blank" rel="noopener"><p class="overline">Length</p><h3 class="h3">About 27 km</h3><p class="muted">From Laguna de Bay, through the Napindan Channel, to Manila Bay.</p><p class="src">Source: ADB (2009) · <b>Visit source ↗</b></p></a>
+        <a class="box" href="https://kanto.ph/voices/pasig-river-national-cultural-treasure/" target="_blank" rel="noopener"><p class="overline">Route</p><h3 class="h3">5 cities</h3><p class="muted">Taguig, Pasig, Makati, Mandaluyong, and Manila.</p><p class="src">Source: Kanto (2022) · <b>Visit source ↗</b></p></a>
+        <a class="box" href="https://kanto.ph/voices/pasig-river-national-cultural-treasure/" target="_blank" rel="noopener"><p class="overline">Tributaries</p><h3 class="h3">Marikina &amp; San Juan</h3><p class="muted">Formed where the Marikina River meets the Napindan Channel. The San Juan River also feeds it.</p><p class="src">Source: Kanto (2022) · <b>Visit source ↗</b></p></a>
+        <a class="box" href="https://kanto.ph/voices/pasig-river-national-cultural-treasure/" target="_blank" rel="noopener"><p class="overline">Width &amp; depth</p><h3 class="h3">91 m · 0.5–5.5 m</h3><p class="muted">Average width. Deepest between the Guadalupe and C6 bridges.</p><p class="src">Source: Kanto (2022) · <b>Visit source ↗</b></p></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-sky">
+    <div class="wrap">
+      <div class="heading" style="margin-bottom:24px">
+        <p class="overline">Map</p>
+        <h2 class="h2">Where the river flows</h2>
+        <p class="lead">From Laguna de Bay, through the Napindan Channel, to Manila Bay.</p>
+      </div>
+      <div class="map">
+        <svg viewBox="0 0 1200 680" role="img" aria-label="Simplified map of the Pasig River running from Laguna de Bay in the southeast to Manila Bay in the west, with the Marikina and San Juan rivers joining it.">
+          <rect width="1200" height="680" fill="#eef3f7"/>
+          <g stroke="#dde6ee" stroke-width="1"><path d="M0 170H1200M0 340H1200M0 510H1200M300 0V680M600 0V680M900 0V680"/></g>
+          <path d="M0 263C90 262 190 250 270 262C300 330 312 420 300 520C290 600 318 650 323 680H0Z" fill="#b9d4ea"/>
+          <path d="M1040 680C1050 640 1090 606 1140 600C1170 597 1190 604 1200 598V680Z" fill="#b9d4ea"/>
+          <!-- tributaries -->
+          <path d="M528 0C522 60 536 120 530 180C525 230 540 270 548 300" fill="none" stroke="#6fa6d0" stroke-width="7" stroke-linecap="round"/>
+          <path d="M540 118C620 110 700 70 780 64C810 62 830 58 848 56" fill="none" stroke="#6fa6d0" stroke-width="5" stroke-linecap="round"/>
+          <path d="M900 5C860 80 872 150 900 220C930 300 880 380 930 450C960 490 990 510 1002 540" fill="none" stroke="#6fa6d0" stroke-width="8" stroke-linecap="round"/>
+          <!-- Napindan -->
+          <path d="M1002 552C1015 580 1030 610 1058 640" fill="none" stroke="#2a7fc1" stroke-width="9" stroke-linecap="round"/>
+          <!-- Pasig -->
+          <path d="M283 268C360 258 430 270 500 300C560 325 600 355 640 395C680 430 740 470 810 500C880 530 940 552 1002 552" fill="none" stroke="#004f87" stroke-width="14" stroke-linecap="round"/>
+          <!-- cities -->
+          <g fill="#14202b"><circle cx="330" cy="240" r="5"/><circle cx="610" cy="240" r="5"/><circle cx="760" cy="150" r="5"/><circle cx="650" cy="365" r="5"/><circle cx="1040" cy="420" r="5"/><circle cx="620" cy="545" r="5"/><circle cx="905" cy="620" r="5"/></g>
+          <g font-size="20" font-weight="600" fill="#14202b">
+            <text x="342" y="234">Manila</text><text x="622" y="234">San Juan</text><text x="772" y="144">Quezon City</text>
+            <text x="662" y="359">Mandaluyong</text><text x="1052" y="414">Pasig</text><text x="632" y="539">Makati</text><text x="917" y="614">Taguig</text>
+          </g>
+          <g font-size="22" font-weight="600" fill="#004f87">
+            <text x="40" y="498">Manila Bay</text>
+            <text x="1082" y="636">Laguna</text><text x="1082" y="660">de Bay</text>
+          </g>
+          <text x="560" y="440" font-size="18" font-weight="700" letter-spacing="3" fill="#004f87" transform="rotate(34 560 440)">PASIG RIVER</text>
+          <text x="930" y="360" font-size="14" font-weight="600" fill="#2a7fc1" transform="rotate(76 930 360)">Marikina River</text>
+          <text x="566" y="140" font-size="14" font-weight="600" fill="#2a7fc1" transform="rotate(88 566 140)">San Juan River</text>
+          <text x="1010" y="537" font-size="14" font-weight="600" fill="#2a7fc1">Napindan Channel</text>
+          <!-- compass -->
+          <path d="M80 40L94 80L80 72L66 80Z" fill="#14202b"/>
+          <text x="73" y="100" font-size="16" font-weight="700" fill="#14202b">N</text>
+          <!-- legend -->
+          <rect x="40" y="560" width="230" height="96" rx="8" fill="#fff" stroke="#d5dee7"/>
+          <path d="M58 588H98" stroke="#004f87" stroke-width="8" stroke-linecap="round"/>
+          <path d="M58 616H98" stroke="#6fa6d0" stroke-width="5" stroke-linecap="round"/>
+          <text x="110" y="593" font-size="14" fill="#14202b">Pasig River (27 km)</text>
+          <text x="110" y="621" font-size="14" fill="#14202b">Tributaries</text>
+          <text x="58" y="645" font-size="12" fill="#4a5866">Simplified. Not to scale.</text>
+        </svg>
+      </div>
+      <p class="caption map-hint">Swipe sideways to see the whole map →</p>
+      <p class="caption" style="margin-top:24px">Simplified map, not to scale. River route and cities: Kanto (2022); length: ADB (2009).</p>
+      <a class="btn btn-primary" style="margin-top:24px" href="https://www.google.com/maps/place/Pasig+River" target="_blank" rel="noopener">Open live map ↗</a>
+    </div>
+  </section>
+
+  <section class="section on-dark">
+    <div class="wrap">
+      <div class="heading">
+        <p class="overline">History</p>
+        <h2 class="h2">How the river declined, and began to recover</h2>
+      </div>
+      <div class="timeline">
+        <div class="tl"><p class="yr">1930s</p><p>Fish migration from Laguna de Bay begins to decline.</p></div>
+        <div class="tl"><p class="yr">1940s–50s</p><p>After World War II, population growth and industry pollute the banks. People stop bathing in the river.</p></div>
+        <div class="tl"><p class="yr">1960s</p><p>People stop washing clothes in the river. Ferry transport declines.</p></div>
+        <div class="tl"><p class="yr">1970s</p><p>The water turns dark and gives off a strong odor.</p></div>
+        <div class="tl"><p class="yr">1980s</p><p>Fishing activities stop.</p></div>
+        <div class="tl key"><p class="yr">1990</p><p>The river is declared biologically dead.</p></div>
+        <div class="tl"><p class="yr">2018</p><p>The Pasig River wins the Asia Riverprize for its rehabilitation work.</p></div>
+        <div class="tl"><p class="yr">2025</p><p>Phase 3 of the rehabilitation project opens at Plaza Mexico, Intramuros.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap split" style="align-items:center">
+      <a class="video" href="https://www.youtube.com/watch?v=phKXSnY-_1Q" target="_blank" rel="noopener" aria-label="Watch World’s Most Polluted River by Nomadic Indian on YouTube">
+        <img src="img/video-1280.webp" srcset="img/video-640.webp 640w, img/video-1280.webp 718w" sizes="(max-width:820px) 100vw, 568px" decoding="async" style="background:#1d2a33 url(data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAADQAwCdASoUAAwAPu1kqk2ppaQiMAgBMB2JYwC7ACHSlWFaHuSVFIAA/unzuOuao2DDgpThjy5Yq2sJfw4RcZQhrEtsqV+/a/IcQwDoAAA=) center/cover" alt="" loading="lazy">
+      </a>
+      <div class="col">
+        <p class="overline">Watch</p>
+        <h3 class="h3">See the river for yourself</h3>
+        <p class="lead">A short video by Nomadic Indian on the river’s condition, from the riverbanks.</p>
+        <a class="btn btn-primary" href="https://www.youtube.com/watch?v=phKXSnY-_1Q" target="_blank" rel="noopener">Watch on YouTube <span aria-hidden="true">→</span></a>
+        <p class="caption">Video by Nomadic Indian on YouTube.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Chapter 2 -->
+  <section class="hero chapter" id="ch2">
+    <div class="photo"><img src="img/smoke-640.webp" srcset="img/smoke-640.webp 626w" sizes="100vw" decoding="async" style="background:#1d2a33 url(data:image/webp;base64,UklGRk4AAABXRUJQVlA4IEIAAADwAwCdASoUAAwAPu1oqk6ppiQiMAgBMB2JZQCdAB9fEXRayekqqMtAAMz1qNH5uI52sml2jR68Ku0RG1JuYYTlgAA=) center/cover" alt="" loading="lazy"></div>
+    <div class="scrim"></div>
+    <div class="wrap">
+      <div class="hero-content">
+        <p class="overline">Chapter 2 of 3</p>
+        <h1>What pollutes the river, and what does that harm?</h1>
+        <p class="sub">Most pollution starts on land. It then harms wildlife, nearby communities, and Manila Bay.</p>
+      </div>
+    </div>
+    <svg class="wave" viewBox="0 0 1440 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0 22C240 4 480 4 720 16s480 20 720 0V40H0Z" fill="#fff"/></svg>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="heading">
+        <p class="overline">Causes</p>
+        <h2 class="h2">Where the pollution comes from</h2>
+        <p class="lead">Four main sources of pollution.</p>
+      </div>
+      <div class="grid-2">
+        <a class="box cause" href="https://www.adb.org/results/country-water-action-resuscitating-pasig-river" target="_blank" rel="noopener">
+          <h3 class="h3"><span class="num">01</span>&nbsp; Household waste</h3>
+          <p class="kicker">The biggest source: about 65% of waste dumped in the river comes from riverside households (ADB, 2009).</p>
+          <ul><li>Many riverside homes lack sewer connections or septic tanks</li><li>Wastewater carries human waste, detergents, and food residue</li><li>Uncollected garbage piles up in drains</li></ul>
+          <p class="src">Source: ADB (2009) · <b>Visit source ↗</b></p>
+        </a>
+        <a class="box cause" href="https://www.adb.org/results/country-water-action-resuscitating-pasig-river" target="_blank" rel="noopener">
+          <h3 class="h3"><span class="num">02</span>&nbsp; Industrial waste</h3>
+          <p class="kicker">Some nearby factories discharge wastewater without proper treatment.</p>
+          <ul><li>Sources include tanneries, food processing, and chemical or metal plants</li><li>Wastewater may carry heavy metals and chemicals</li><li>Gaps in enforcement let some discharges continue</li></ul>
+          <p class="src">Source: ADB (2009) · <b>Visit source ↗</b></p>
+        </a>
+        <a class="box cause" href="https://doi.org/10.1016/j.jconhyd.2025.104527" target="_blank" rel="noopener">
+          <h3 class="h3"><span class="num">03</span>&nbsp; Plastic and solid waste</h3>
+          <p class="kicker">Limited collection and recycling let rubbish reach the river.</p>
+          <ul><li>Rain washes litter from streets and drains into the water</li><li>Plastic breaks into microplastics that are hard to remove</li><li>Microplastics were found at every sampling site in a 2025 study</li></ul>
+          <p class="src">Source: Ilao et al. (2025) · <b>Visit source ↗</b></p>
+        </a>
+        <a class="box cause" href="https://www.philstar.com/nation/2025/09/28/2475895/pcg-tributaries-main-contributor-pasig-river-pollution" target="_blank" rel="noopener">
+          <h3 class="h3"><span class="num">04</span>&nbsp; Polluted tributaries</h3>
+          <p class="kicker">Esteros and rivers from San Juan, Quezon City, and Marikina feed the Pasig.</p>
+          <ul><li>They carry sewage and rubbish from upstream communities</li><li>The Coast Guard calls tributaries the main contributor (2025)</li><li>Cleaning the Pasig alone cannot work while they stay polluted</li></ul>
+          <p class="src">Source: Philstar (2025) · <b>Visit source ↗</b></p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section on-dark">
+    <div class="wrap">
+      <div class="heading">
+        <p class="overline">Effects</p>
+        <h2 class="h2">What the pollution harms</h2>
+        <p class="lead" style="color:var(--inv-muted)">Figures are shown only when a source supports them.</p>
+      </div>
+      <div>
+        <a class="fx" href="https://ncr.denr.gov.ph/wp-content/uploads/2026/01/ANNUAL-REPORT-2025.pdf" target="_blank" rel="noopener"><p class="k">Aquatic life</p><div class="v"><strong>Pollution-tolerant species dominate</strong><p>Higher oxygen demand from decaying waste leaves less oxygen for fish. Introduced janitor fish now dominate, while native species are under threat.</p></div><p class="src s">Source: DENR-NCR (2025)<br><b>Visit source ↗</b></p></a>
+        <a class="fx" href="https://ncr.denr.gov.ph/wp-content/uploads/2026/01/ANNUAL-REPORT-2025.pdf" target="_blank" rel="noopener"><p class="k">People</p><div class="v"><strong>Fecal coliform: 138,500 MPN/100 mL (2025)</strong><p>Fecal contamination is still high, so direct contact with the water is unsafe. Debris also blocks waterways and raises flood risk.</p></div><p class="src s">Source: DENR-NCR (2025)<br><b>Visit source ↗</b></p></a>
+        <a class="fx" href="https://newsinfo.inquirer.net/1446482/pasig-river-makes-international-waves-despite-being-dead" target="_blank" rel="noopener"><p class="k">Livelihoods</p><div class="v"><strong>Declared biologically dead by 1990</strong><p>A river that can no longer support life can no longer support fishing, bathing, washing, or ferry travel the way it once did.</p></div><p class="src s">Source: Philippine Daily Inquirer (2021)<br><b>Visit source ↗</b></p></a>
+        <a class="fx" href="https://doi.org/10.1126/sciadv.aaz5803" target="_blank" rel="noopener"><p class="k">Manila Bay and the ocean</p><div class="v"><strong>Ranked the world’s top river source of ocean plastic in a 2021 study</strong><p>Pollution flows downstream into Manila Bay. DENR questioned the 2021 ranking, so treat it as an estimate.</p></div><p class="src s">Source: Meijer et al. (2021); BusinessWorld (2021)<br><b>Visit source ↗</b></p></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Chapter 3 -->
+  <section class="hero chapter" id="ch3">
+    <div class="photo"><img src="img/skyline-1280.webp" srcset="img/skyline-640.webp 640w, img/skyline-1280.webp 1199w" sizes="100vw" decoding="async" style="background:#1d2a33 url(data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAAAQBACdASoUAA4APu1iqk2ppaQiMAgBMB2JZQCdIAeB+pTyXSfXKnhtAACxScq/2J+9LdB6D1XU0x3vsQEPs1dG5PG874f0Li/ypgAA) center/cover" alt="" loading="lazy"></div>
+    <div class="scrim"></div>
+    <div class="wrap">
+      <div class="hero-content">
+        <p class="overline">Chapter 3 of 3</p>
+        <h1>Is the river getting better?</h1>
+        <p class="sub">Partly. Some water-quality indicators improved in 2025, while others got worse.</p>
+      </div>
+    </div>
+    <svg class="wave" viewBox="0 0 1440 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0 22C240 4 480 4 720 16s480 20 720 0V40H0Z" fill="#fff"/></svg>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="heading">
+        <p class="overline">Water quality</p>
+        <h2 class="h2">What the 2025 data says</h2>
+        <p class="lead">Progress does not mean full recovery. Falling fecal coliform does not make the water safe for swimming.</p>
+      </div>
+      <div class="grid-3">
+        <a class="box chart" href="https://ncr.denr.gov.ph/wp-content/uploads/2026/01/ANNUAL-REPORT-2025.pdf" target="_blank" rel="noopener">
+          <div class="top"><div><p class="name">Fecal coliform</p><p class="caption">MPN/100 mL · lower is better</p></div><span class="pill good">−43%</span></div>
+          <div class="bar-row"><div class="lbl"><span>2024</span><span>242,612</span></div><div class="track"><i class="prev" style="width:100%"></i></div></div>
+          <div class="bar-row"><div class="lbl"><span>2025</span><span>138,500</span></div><div class="track"><i style="width:57.1%"></i></div></div>
+          <p><strong style="font-weight:600">Takeaway:</strong> Less fecal contamination, but the water is still not safe for contact.</p>
+          <p class="src">Source: DENR-NCR (2025), p. 195 · <b>Visit source ↗</b></p>
+        </a>
+        <a class="box chart" href="https://ncr.denr.gov.ph/wp-content/uploads/2026/01/ANNUAL-REPORT-2025.pdf" target="_blank" rel="noopener">
+          <div class="top"><div><p class="name">Dissolved oxygen</p><p class="caption">mg/L · higher is better</p></div><span class="pill good">+22%</span></div>
+          <div class="bar-row"><div class="lbl"><span>2024</span><span>3.01</span></div><div class="track"><i class="prev" style="width:82.2%"></i></div></div>
+          <div class="bar-row"><div class="lbl"><span>2025</span><span>3.66</span></div><div class="track"><i style="width:100%"></i></div></div>
+          <p><strong style="font-weight:600">Takeaway:</strong> More oxygen for aquatic life, though stress remains across the system.</p>
+          <p class="src">Source: DENR-NCR (2025), p. 195 · <b>Visit source ↗</b></p>
+        </a>
+        <a class="box chart" href="https://ncr.denr.gov.ph/wp-content/uploads/2026/01/ANNUAL-REPORT-2025.pdf" target="_blank" rel="noopener">
+          <div class="top"><div><p class="name">Biochemical oxygen demand (BOD)</p><p class="caption">mg/L · lower is better</p></div><span class="pill bad">+29%</span></div>
+          <div class="bar-row"><div class="lbl"><span>2024</span><span>6.32</span></div><div class="track"><i class="prev" style="width:77.3%"></i></div></div>
+          <div class="bar-row"><div class="lbl"><span>2025</span><span>8.18</span></div><div class="track"><i style="width:100%"></i></div></div>
+          <p><strong style="font-weight:600">Takeaway:</strong> More organic pollution, leaving less oxygen for aquatic life.</p>
+          <p class="src">Source: DENR-NCR (2025), p. 195 · <b>Visit source ↗</b></p>
+        </a>
+      </div>
+      <p class="caption" style="margin-top:48px">Main Pasig River, 2024 vs 2025. Source: DENR-NCR (2025), Annual Report, p. 195.</p>
+    </div>
+  </section>
+
+  <section class="section on-dark">
+    <div class="wrap">
+      <div class="heading">
+        <p class="overline">Aquatic life</p>
+        <h2 class="h2">Is wildlife coming back?</h2>
+        <p class="lead" style="color:var(--inv-muted)">Findings from DENR-NCR’s 2025 biodiversity assessment.</p>
+      </div>
+      <div class="grid-3">
+        <a class="find" href="https://ncr.denr.gov.ph/wp-content/uploads/2026/01/ANNUAL-REPORT-2025.pdf" target="_blank" rel="noopener"><h3 class="h3">Fish survive, but the mix has changed</h3><p class="d">Introduced janitor fish dominate. Native Manila sea catfish and bluespot mullet remain but are threatened.</p><p class="src">Source: DENR-NCR (2025) · <b>Visit source ↗</b></p></a>
+        <a class="find" href="https://ncr.denr.gov.ph/wp-content/uploads/2026/01/ANNUAL-REPORT-2025.pdf" target="_blank" rel="noopener"><h3 class="h3">Algae show hidden stress</h3><p class="d">Pollution-tolerant algae linked to nutrient-rich, low-oxygen water were recorded in the river.</p><p class="src">Source: DENR-NCR (2025) · <b>Visit source ↗</b></p></a>
+        <a class="find" href="https://ncr.denr.gov.ph/wp-content/uploads/2026/01/ANNUAL-REPORT-2025.pdf" target="_blank" rel="noopener"><h3 class="h3">Tributaries matter too</h3><p class="d">Phytoplankton in major and minor tributaries were severely affected, so recovery must include the whole system.</p><p class="src">Source: DENR-NCR (2025) · <b>Visit source ↗</b></p></a>
+      </div>
+      <p class="caption" style="margin-top:48px;color:var(--inv-muted)">Source: DENR-NCR (2025)</p>
+    </div>
+  </section>
+
+  <section class="section bg-sky">
+    <div class="wrap">
+      <div class="heading">
+        <p class="overline">What is being done</p>
+        <h2 class="h2">Government, groups, and communities at work</h2>
+      </div>
+      <div class="grid-3">
+        <a class="card" href="https://www.riverrecycle.com/projects/pasig-river-cleanup-with-ictsi-foundation/" target="_blank" rel="noopener">
+          <div class="img"><img src="img/work-1-1280.webp" srcset="img/work-1-640.webp 640w, img/work-1-1280.webp 1024w" sizes="(max-width:820px) 100vw, 384px" decoding="async" style="background:#1d2a33 url(data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAACwAwCdASoUAAoAPu1kqk2ppaQiMAgBMB2JZwAAW+/EZ5QM2P7jIAD+eRwtyCyOENmIMn2CxlW2NWsNzLJx56FfOuLFrdlTgAA=) center/cover" alt="Floating barrier collecting waste on the San Juan River" loading="lazy"></div>
+          <div class="body"><p class="overline">Cleanup · Since 2023</p><h3 class="h3">Plastic caught before the bay</h3><p class="muted">RiverRecycle and the ICTSI Foundation collect waste on the San Juan River, then recycle plastic into boards that can replace plywood, at over 1,000 kg per day.</p><p class="src">Source: RiverRecycle (n.d.) · <b>Visit source ↗</b></p></div>
+        </a>
+        <a class="card" href="https://www.dbm.gov.ph/index.php/management-2/580-prrc-highlights-milestones-and-priority-rehabilitation-activities-for-the-pasig-river-system" target="_blank" rel="noopener">
+          <div class="img"><img src="img/work-2-1280.webp" srcset="img/work-2-640.webp 640w, img/work-2-1280.webp 1080w" sizes="(max-width:820px) 100vw, 384px" decoding="async" style="background:#1d2a33 url(data:image/webp;base64,UklGRnQAAABXRUJQVlA4IGgAAAAwBQCdASoUABQAPu1urlKppiQiqAgBMB2JYwDGQBElZr9QgQ2FZhX7cucMh2X7ehWZYAD+2mKzMTtb1LAUlSC+VzlMRZF58LnusaO1HTC+TsDISkVqpUUq04mUntprWfFqNI6UEAAAAA==) center/cover" alt="Workers removing trash caught by a river boom" loading="lazy"></div>
+          <div class="body"><p class="overline">Rehabilitation · As of 2019</p><h3 class="h3">19 km dredged, 30 million kg removed</h3><p class="muted">The Pasig River Rehabilitation Commission also relocated 19,000 riverside families and cleared 508 structures from easements.</p><p class="src">Source: PRRC via DBM (2019) · <b>Visit source ↗</b></p></div>
+        </a>
+        <a class="card" href="https://pia.gov.ph/news/pbbm-launches-third-phase-of-pasig-river-rehabilitation-project/" target="_blank" rel="noopener">
+          <div class="img"><img src="img/work-3-1280.webp" srcset="img/work-3-640.webp 640w, img/work-3-1280.webp 1000w" sizes="(max-width:820px) 100vw, 384px" decoding="async" style="background:#1d2a33 url(data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAACwAwCdASoUAA4APu1oqk6ppiQiMAgBMB2JQBOkERgiZVaDbE0sQAD+FlN38aEttYn49xAIS+Wk6oqoXhs5hc3oiQM5An6m9zcoBsWRQL//pcPCzgAAAA==) center/cover" alt="Cleanup crew bagging plastic waste from the river" loading="lazy"></div>
+          <div class="body"><p class="overline">Public spaces · 2025</p><h3 class="h3">Riverbanks reopened to people</h3><p class="muted">Phase 3 of the rehabilitation project opened at Plaza Mexico, Intramuros. In 2026, DENR also signed a five-year cleanup agreement with The Ocean Cleanup.</p><p class="src">Source: PIA (2025); IAC-PRUD (2025); The Ocean Cleanup (2026) · <b>Visit source ↗</b></p></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="act">
+    <div class="wrap">
+      <div class="heading">
+        <p class="overline">What needs to happen next</p>
+        <h2 class="h2">Fixing the river takes two levels of action</h2>
+      </div>
+      <div class="grid-2">
+        <div class="steps-card gov">
+          <p class="overline">Government and industry</p>
+          <h3 class="h3">Stop pollution at the source</h3>
+          <ol class="steps">
+            <li><div><strong>Sewers and treatment</strong><span>Connect riverside homes and treat wastewater before it reaches the river.</span></div></li>
+            <li><div><strong>Enforce discharge rules</strong><span>Take consistent action against illegal discharges.</span></div></li>
+            <li><div><strong>Better waste collection</strong><span>Improve garbage collection and recycling.</span></div></li>
+            <li><div><strong>Clean the tributaries</strong><span>Clean esteros and tributaries, not just the main river.</span></div></li>
+            <li><div><strong>Monitor and publish</strong><span>Test water quality regularly and share the results publicly.</span></div></li>
+          </ol>
+        </div>
+        <div class="steps-card you">
+          <p class="overline">You</p>
+          <h3 class="h3">What you can do</h3>
+          <ol class="steps">
+            <li><div><strong>Cut single-use plastic</strong><span>Bring reusable bags, bottles, and containers.</span></div></li>
+            <li><div><strong>Segregate your waste</strong><span>Separate biodegradable, recyclable, and residual waste.</span></div></li>
+            <li><div><strong>Keep drains clear</strong><span>Never throw litter into canals or storm drains.</span></div></li>
+            <li><div><strong>Join a cleanup</strong><span>Volunteer with your barangay, school, or a local group.</span></div></li>
+            <li><div><strong>Learn and share</strong><span>Share sourced facts, like the ones on this site.</span></div></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-block:48px 96px">
+    <div class="wrap">
+      <details class="sources">
+        <summary><span><span class="t">Sources</span><span class="c">(18)</span></span><svg width="20" height="20" aria-hidden="true"><use href="#chev"/></svg></summary>
+        <ol class="src-list" data-list="river"></ol>
+      </details>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div class="col">
+      <div style="display:flex;align-items:center;gap:12px"><img class="logo" src="img/logo.png" alt=""><span style="font:600 24px/32px var(--display)">Agos Pasig</span></div>
+      <p class="dim" style="max-width:320px">A student-led educational project on water pollution in the Pasig River.</p>
+    </div>
+    <div class="col">
+      <p class="overline">Explore</p>
+      <a href="#home">Home</a><a href="#about">About</a><a href="#river">The River</a>
+    </div>
+    <div class="col" style="width:220px">
+      <p class="overline">Ways to help</p>
+      <p>Reduce single-use plastic</p><p>Segregate your waste</p><p>Keep drains clear</p><p>Join a cleanup</p><p>Learn and share</p>
+    </div>
+    <div class="col">
+      <p style="font:600 20px/28px var(--display)">Keep the hope flowing</p>
+      <p class="dim" style="max-width:300px">The river’s future is connected to ours. See practical ways to help.</p>
+      <a class="btn btn-light" href="#act" style="color:var(--text)">What you can do <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+  <div class="bottom"><div class="wrap">© 2026 Agos Pasig. A student project for GE - A2101, Mapúa Malayan Digital College. Sources are listed on each page.</div></div>
+</footer>
+
+<script>
+(function(){
+  var SOURCES = [
+    ["Asian Development Bank. (2009, April 30). Country water action: Resuscitating the Pasig River.","https://www.adb.org/results/country-water-action-resuscitating-pasig-river","home"],
+    ["BusinessWorld. (2021). DENR questions study saying Pasig River is top plastic polluter.","https://www.bworldonline.com/?p=378770"],
+    ["Department of Environment and Natural Resources – National Capital Region. (2025). Annual report 2025.","https://ncr.denr.gov.ph/wp-content/uploads/2026/01/ANNUAL-REPORT-2025.pdf","home"],
+    ["Department of Environment and Natural Resources – National Capital Region. (2025). State of Metro Manila’s environment and natural resources.","https://ncr.denr.gov.ph/news-events/denr-ncr-launches-state-of-metro-manilas-environment-and-natural-resources-campaign-in-celebration-of-philippine-environment-month-2025/"],
+    ["Department of Environment and Natural Resources – National Capital Region. (n.d.). Manila Bay rehabilitation program.","https://ncr.denr.gov.ph/manila-bay-rehabilitation-program/"],
+    ["Ilao, C. I. L., Casila, J. C. C., Kurniawan, T. A., Sampang, R. S., Panganiban, L. L. T., Patacsil, L. B., & Limbago, J. S. (2025). Assessment of microplastics and heavy metal contamination in surficial sediments of Pasig River, Philippines during wet season. Journal of Contaminant Hydrology, 270, 104527.","https://doi.org/10.1016/j.jconhyd.2025.104527"],
+    ["Inter-Agency Council for the Pasig River Urban Development. (2025). Phase 3 – Pasig: Bigyang buhay muli.","https://pasigriver.com.ph/phase-3/"],
+    ["International RiverFoundation. (2018). Pasig River: Asia Riverprize winner.","https://riverfoundation.org.au/prizes/pasig-river/"],
+    ["Kanto Digital Architecture Magazine. (2022). The importance of the Pasig River.","https://kanto.ph/voices/pasig-river-national-cultural-treasure/"],
+    ["Meijer, L. J. J., van Emmerik, T., van der Ent, R., Schmidt, C., & Lebreton, L. (2021). More than 1000 rivers account for 80% of global riverine plastic emissions into the ocean. Science Advances, 7(18), eaaz5803.","https://doi.org/10.1126/sciadv.aaz5803"],
+    ["Nomadic Indian. (n.d.). World’s most polluted river: Pasig, Philippines [Video]. YouTube.","https://www.youtube.com/watch?v=phKXSnY-_1Q"],
+    ["Pasig River Rehabilitation Commission. (2019, March 4). PRRC highlights milestones and priority rehabilitation activities for the Pasig River system. Department of Budget and Management.","https://www.dbm.gov.ph/index.php/management-2/580-prrc-highlights-milestones-and-priority-rehabilitation-activities-for-the-pasig-river-system"],
+    ["Philippine Daily Inquirer. (2021). Pasig River makes international waves despite being dead.","https://newsinfo.inquirer.net/1446482/pasig-river-makes-international-waves-despite-being-dead"],
+    ["Philippine Information Agency. (2025, February 28). PBBM launches third phase of Pasig River Rehabilitation Project.","https://pia.gov.ph/news/pbbm-launches-third-phase-of-pasig-river-rehabilitation-project/"],
+    ["Philstar. (2025, September 28). PCG: Tributaries main contributor to Pasig River pollution.","https://www.philstar.com/nation/2025/09/28/2475895/pcg-tributaries-main-contributor-pasig-river-pollution"],
+    ["RiverRecycle. (n.d.). Pasig River cleanup with ICTSI Foundation.","https://www.riverrecycle.com/projects/pasig-river-cleanup-with-ictsi-foundation/"],
+    ["The Ocean Cleanup. (2026, June 4). The Ocean Cleanup forges alliance with Philippine Government [Press release].","https://theoceancleanup.com/press/press-releases/the-ocean-cleanup-forge-alliance-with-philippine-government/"],
+    ["Villanueva, J. D., Le Coustumer, P., Huneau, F., Motelica-Heino, M., Perez, T. R., Materum, R., Espaldon, M. V. O., & Stoll, S. (2013). Assessment of trace metals during episodic events using DGT passive sampler: A proposal for water management enhancement. Water Resources Management, 27(12), 4163–4181.","https://doi.org/10.1007/s11269-013-0401-5"]
+  ];
+  function fill(list, items){
+    items.forEach(function(s){
+      var li=document.createElement('li');
+      li.appendChild(document.createTextNode(s[0]+' '));
+      var a=document.createElement('a'); a.href=s[1]; a.target='_blank'; a.rel='noopener'; a.textContent=s[1];
+      li.appendChild(a); list.appendChild(li);
+    });
+  }
+  fill(document.querySelector('[data-list="river"]'), SOURCES);
+  fill(document.querySelector('[data-list="home"]'), SOURCES.filter(function(s){return s[2]==='home'}));
+
+  var home=document.getElementById('page-home'), river=document.getElementById('page-river');
+  var riverIds=['river','ch1','ch2','ch3','act'];
+  var links=document.getElementById('nav-links'), menuBtn=document.getElementById('menu-btn');
+
+  function route(){
+    var h=(location.hash||'#home').slice(1);
+    var onRiver=riverIds.indexOf(h)>-1;
+    var wasRiver=!river.hidden;
+    home.hidden=onRiver; river.hidden=!onRiver;
+    var navKey=onRiver?'river':(h==='about'?'about':'home');
+    document.querySelectorAll('[data-nav]').forEach(function(a){a.classList.toggle('active',a.dataset.nav===navKey)});
+    links.classList.remove('open'); menuBtn.setAttribute('aria-expanded','false');
+    var target=(h==='home'||h==='river')?null:document.getElementById(h);
+    var instant=wasRiver!==onRiver;
+    if(target){ target.scrollIntoView({behavior:instant?'instant':'smooth',block:'start'}); }
+    else { window.scrollTo({top:0,behavior:instant?'instant':'smooth'}); }
+  }
+  // Chapter bar: swipe, drag, wheel, edge fades
+  var bar=document.querySelector('.chapbar .wrap'), fl=document.querySelector('.chapbar .fade.l'), fr=document.querySelector('.chapbar .fade.r');
+  function fades(){var m=bar.scrollWidth-bar.clientWidth;fl.classList.toggle('on',bar.scrollLeft>4);fr.classList.toggle('on',bar.scrollLeft<m-4);}
+  bar.addEventListener('scroll',fades,{passive:true}); window.addEventListener('resize',fades);
+  bar.addEventListener('wheel',function(e){if(bar.scrollWidth>bar.clientWidth&&Math.abs(e.deltaY)>Math.abs(e.deltaX)){bar.scrollLeft+=e.deltaY;e.preventDefault();}},{passive:false});
+  var down=false,sx=0,sl=0,moved=false;
+  bar.addEventListener('pointerdown',function(e){if(e.pointerType!=='mouse')return;down=true;moved=false;sx=e.clientX;sl=bar.scrollLeft;});
+  window.addEventListener('pointermove',function(e){if(!down)return;var dx=e.clientX-sx;if(Math.abs(dx)>5){moved=true;bar.classList.add('dragging');}bar.scrollLeft=sl-dx;});
+  window.addEventListener('pointerup',function(){down=false;setTimeout(function(){bar.classList.remove('dragging')},0);});
+  bar.addEventListener('click',function(e){if(moved){e.preventDefault();moved=false;}},true);
+  function showChip(){var c=bar.querySelector('.chip.active');if(c&&!river.hidden){bar.scrollTo({left:bar.scrollLeft+c.getBoundingClientRect().left-bar.getBoundingClientRect().left-parseInt(getComputedStyle(bar).paddingLeft),behavior:'smooth'});}fades();}
+  setTimeout(showChip,50);
+
+  window.addEventListener('hashchange',route);
+  window.addEventListener('hashchange',showChip);
+  // Clicking a link to the section you're already on still scrolls there
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('a[href^="#"]'); if(!a)return;
+    if(a.getAttribute('href')===(location.hash||'#home')){e.preventDefault();route();}
+  });
+  // Close the phone menu on outside tap or Escape
+  document.addEventListener('click',function(e){if(links.classList.contains('open')&&!e.target.closest('.nav')){links.classList.remove('open');menuBtn.setAttribute('aria-expanded','false');}});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&links.classList.contains('open')){links.classList.remove('open');menuBtn.setAttribute('aria-expanded','false');menuBtn.focus();}});
+  // Home page: highlight About in the menu while the About section is on screen
+  var aboutEl=document.getElementById('about');
+  function homeSpy(){
+    if(home.hidden)return;
+    var r=aboutEl.getBoundingClientRect(), mid=window.innerHeight*0.4;
+    var key=(r.top<=mid&&r.bottom>mid)?'about':'home';
+    document.querySelectorAll('[data-nav]').forEach(function(a){a.classList.toggle('active',a.dataset.nav===key)});
+  }
+  window.addEventListener('scroll',function(){requestAnimationFrame(homeSpy)},{passive:true});
+
+  // Scroll spy: light up the chip for the chapter on screen
+  var chapters=['ch1','ch2','ch3','act'], current=null, ticking=false;
+  function spy(){
+    ticking=false;
+    if(river.hidden)return;
+    var line=bar.getBoundingClientRect().bottom+120, cur=null;
+    chapters.forEach(function(id){var el=document.getElementById(id);if(el&&el.getBoundingClientRect().top<=line)cur=id;});
+    if(cur===current)return;
+    current=cur;
+    document.querySelectorAll('[data-chip]').forEach(function(c){c.classList.toggle('active',c.dataset.chip===cur)});
+    var c=cur&&bar.querySelector('[data-chip="'+cur+'"]');
+    if(c){var bl=bar.getBoundingClientRect(),cl=c.getBoundingClientRect(),pad=parseInt(getComputedStyle(bar).paddingLeft);
+      if(cl.left<bl.left+pad||cl.right>bl.right-pad){bar.scrollTo({left:bar.scrollLeft+cl.left-bl.left-pad,behavior:'smooth'});}}
+  }
+  window.addEventListener('scroll',function(){if(!ticking){ticking=true;requestAnimationFrame(spy);}},{passive:true});
+  window.addEventListener('hashchange',function(){current=undefined;setTimeout(spy,60);});
+  menuBtn.addEventListener('click',function(){
+    var open=links.classList.toggle('open'); menuBtn.setAttribute('aria-expanded',String(open));
+  });
+  route();
+})();
+</script>
+</body>
+</html>
