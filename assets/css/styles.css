@@ -229,6 +229,8 @@ a.find:hover .h3{text-decoration:underline;text-decoration-thickness:2px;text-un
 }
 
 /* Utility and one-off styles */
+/* While the action section is hidden, Sources sits right under the light-blue cards section: match it */
+#act[hidden] + .sources-section{background:var(--sky-50);padding-top:0}
 .foot:has(> .footer-cta[hidden]){grid-template-columns:1fr auto 1fr;column-gap:64px}
 .foot:has(> .footer-cta[hidden]) > .col:first-child{justify-self:start}
 .foot:has(> .footer-cta[hidden]) > .footer-help{justify-self:end}
