@@ -102,4 +102,5 @@
     var open=links.classList.toggle('open'); menuBtn.setAttribute('aria-expanded',String(open));
   });
   route();
+  setTimeout(function(){current=undefined;spy();if(typeof homeSpy==='function')homeSpy();},150);
 })();
