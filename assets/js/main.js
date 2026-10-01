@@ -1,5 +1,8 @@
-// Agos Pasig: page routing, menus, chapter bar and sources list
-(function(){
+// Agos Pasig: page switching, menus, chapter bar and sources list
+(function () {
+  'use strict';
+
+  /* ---------- Sources (APA). Third value "home" = also listed on Home ---------- */
   var SOURCES = [
     ["Asian Development Bank. (2009, April 30). Country water action: Resuscitating the Pasig River.","https://www.adb.org/results/country-water-action-resuscitating-pasig-river","home"],
     ["BusinessWorld. (2021). DENR questions study saying Pasig River is top plastic polluter.","https://www.bworldonline.com/?p=378770"],
@@ -20,87 +23,186 @@
     ["The Ocean Cleanup. (2026, June 4). The Ocean Cleanup forges alliance with Philippine Government [Press release].","https://theoceancleanup.com/press/press-releases/the-ocean-cleanup-forge-alliance-with-philippine-government/"],
     ["Villanueva, J. D., Le Coustumer, P., Huneau, F., Motelica-Heino, M., Perez, T. R., Materum, R., Espaldon, M. V. O., & Stoll, S. (2013). Assessment of trace metals during episodic events using DGT passive sampler: A proposal for water management enhancement. Water Resources Management, 27(12), 4163–4181.","https://doi.org/10.1007/s11269-013-0401-5"]
   ];
-  function fill(list, items){
-    items.forEach(function(s){
-      var li=document.createElement('li');
-      li.appendChild(document.createTextNode(s[0]+' '));
-      var a=document.createElement('a'); a.href=s[1]; a.target='_blank'; a.rel='noopener'; a.textContent=s[1];
-      li.appendChild(a); list.appendChild(li);
+
+  function fillSources(list, items) {
+    if (!list) return;
+    items.forEach(function (item) {
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      li.appendChild(document.createTextNode(item[0] + ' '));
+      a.href = item[1];
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.textContent = item[1];
+      li.appendChild(a);
+      list.appendChild(li);
     });
   }
-  fill(document.querySelector('[data-list="river"]'), SOURCES);
-  fill(document.querySelector('[data-list="home"]'), SOURCES.filter(function(s){return s[2]==='home'}));
+  fillSources(document.querySelector('[data-list="river"]'), SOURCES);
+  fillSources(document.querySelector('[data-list="home"]'), SOURCES.filter(function (s) { return s[2] === 'home'; }));
 
-  var home=document.getElementById('page-home'), river=document.getElementById('page-river');
-  var riverIds=['river','ch1','ch2','ch3','act'];
-  var links=document.getElementById('nav-links'), menuBtn=document.getElementById('menu-btn');
+  /* ---------- Elements ---------- */
+  var home = document.getElementById('page-home');
+  var river = document.getElementById('page-river');
+  var aboutEl = document.getElementById('about');
+  var nav = document.querySelector('.nav');
+  var links = document.getElementById('nav-links');
+  var menuBtn = document.getElementById('menu-btn');
+  var bar = document.querySelector('.chapbar .wrap');
+  var fadeL = document.querySelector('.chapbar .fade.l');
+  var fadeR = document.querySelector('.chapbar .fade.r');
+  var RIVER_IDS = ['river', 'ch1', 'ch2', 'ch3', 'act'];
+  var CHAPTERS = ['ch1', 'ch2', 'ch3', 'act'];
 
-  function route(){
-    var h=(location.hash||'#home').slice(1);
-    var onRiver=riverIds.indexOf(h)>-1;
-    var prevPage=!river.hidden?'river':'home';
-    var page=onRiver?'river':'home';
-    home.hidden=onRiver; river.hidden=!onRiver;
-    var navKey=onRiver?'river':(h==='about'?'about':'home');
-    document.querySelectorAll('[data-nav]').forEach(function(a){a.classList.toggle('active',a.dataset.nav===navKey)});
-    links.classList.remove('open'); menuBtn.setAttribute('aria-expanded','false');
-    var target=(h==='home'||h==='river')?null:document.getElementById(h);
-    var instant=prevPage!==page;
-    if(target){ target.scrollIntoView({behavior:instant?'instant':'smooth',block:'start'}); }
-    else { window.scrollTo({top:0,behavior:instant?'instant':'smooth'}); }
+  function isShown(el) { return !!el && !el.hidden; }
+
+  function setActive(selector, attr, key) {
+    document.querySelectorAll(selector).forEach(function (el) {
+      var on = el.getAttribute(attr) === key;
+      el.classList.toggle('active', on);
+      if (on) el.setAttribute('aria-current', 'true'); else el.removeAttribute('aria-current');
+    });
   }
-  // Chapter bar: swipe, drag, wheel, edge fades
-  var bar=document.querySelector('.chapbar .wrap'), fl=document.querySelector('.chapbar .fade.l'), fr=document.querySelector('.chapbar .fade.r');
-  function fades(){var m=bar.scrollWidth-bar.clientWidth;fl.classList.toggle('on',bar.scrollLeft>4);fr.classList.toggle('on',bar.scrollLeft<m-4);}
-  bar.addEventListener('scroll',fades,{passive:true}); window.addEventListener('resize',fades);
-  bar.addEventListener('wheel',function(e){if(bar.scrollWidth>bar.clientWidth&&Math.abs(e.deltaY)>Math.abs(e.deltaX)){bar.scrollLeft+=e.deltaY;e.preventDefault();}},{passive:false});
-  var down=false,sx=0,sl=0,moved=false;
-  bar.addEventListener('pointerdown',function(e){if(e.pointerType!=='mouse')return;down=true;moved=false;sx=e.clientX;sl=bar.scrollLeft;});
-  window.addEventListener('pointermove',function(e){if(!down)return;var dx=e.clientX-sx;if(Math.abs(dx)>5){moved=true;bar.classList.add('dragging');}bar.scrollLeft=sl-dx;});
-  window.addEventListener('pointerup',function(){down=false;setTimeout(function(){bar.classList.remove('dragging')},0);});
-  bar.addEventListener('click',function(e){if(moved){e.preventDefault();moved=false;}},true);
-  function showChip(){var c=bar.querySelector('.chip.active');if(c&&!river.hidden){bar.scrollTo({left:bar.scrollLeft+c.getBoundingClientRect().left-bar.getBoundingClientRect().left-parseInt(getComputedStyle(bar).paddingLeft),behavior:'smooth'});}fades();}
-  setTimeout(showChip,50);
 
-  window.addEventListener('hashchange',route);
-  var aboutEl=document.getElementById('about');
-  function homeSpy(){
-    if(home.hidden)return;
-    var navH=document.querySelector('.nav').offsetHeight;
-    var key=aboutEl.getBoundingClientRect().top<=navH+120?'about':'home';
-    document.querySelectorAll('[data-nav]').forEach(function(a){a.classList.toggle('active',a.dataset.nav===key)});
+  function closeMenu() {
+    links.classList.remove('open');
+    menuBtn.setAttribute('aria-expanded', 'false');
   }
-  window.addEventListener('scroll',function(){requestAnimationFrame(homeSpy)},{passive:true});
-  window.addEventListener('hashchange',showChip);
-  // Clicking a link to the section you're already on still scrolls there
-  document.addEventListener('click',function(e){
-    var a=e.target.closest('a[href^="#"]'); if(!a)return;
-    if(a.getAttribute('href')===(location.hash||'#home')){e.preventDefault();route();}
+
+  /* ---------- Page switching (Home / The River) ---------- */
+  function route() {
+    var hash = (location.hash || '#home').slice(1);
+    var onRiver = RIVER_IDS.indexOf(hash) > -1;
+    var switching = river.hidden === onRiver;   // true when the visible page changes
+    home.hidden = onRiver;
+    river.hidden = !onRiver;
+    setActive('[data-nav]', 'data-nav', onRiver ? 'river' : (hash === 'about' ? 'about' : 'home'));
+    closeMenu();
+
+    var target = (hash === 'home' || hash === 'river') ? null : document.getElementById(hash);
+    var behavior = switching ? 'instant' : 'smooth';
+    if (isShown(target)) target.scrollIntoView({ behavior: behavior, block: 'start' });
+    else window.scrollTo({ top: 0, behavior: behavior });
+
+    currentChapter = undefined;
+    setTimeout(updateHighlights, 60);
+  }
+
+  /* ---------- Scroll highlights ---------- */
+  var currentChapter;
+
+  // Home: "Home" above the About section, "About" from there down
+  function homeHighlight() {
+    if (home.hidden) return;
+    var key = aboutEl.getBoundingClientRect().top <= nav.offsetHeight + 120 ? 'about' : 'home';
+    setActive('[data-nav]', 'data-nav', key);
+  }
+
+  // The River: light up the chip for the chapter on screen
+  function chapterHighlight() {
+    if (river.hidden) return;
+    var line = bar.getBoundingClientRect().bottom + 120;
+    var cur = null;
+    CHAPTERS.forEach(function (id) {
+      var el = document.getElementById(id);
+      if (isShown(el) && el.getBoundingClientRect().top <= line) cur = id;
+    });
+    if (cur === currentChapter) return;
+    currentChapter = cur;
+    setActive('[data-chip]', 'data-chip', cur);
+    scrollChipIntoView(cur && bar.querySelector('[data-chip="' + cur + '"]'));
+  }
+
+  function updateHighlights() {
+    homeHighlight();
+    chapterHighlight();
+  }
+
+  var ticking = false;
+  window.addEventListener('scroll', function () {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () { ticking = false; updateHighlights(); });
+  }, { passive: true });
+
+  /* ---------- Chapter bar: swipe, drag, wheel, edge fades ---------- */
+  function updateFades() {
+    var max = bar.scrollWidth - bar.clientWidth;
+    fadeL.classList.toggle('on', bar.scrollLeft > 4);
+    fadeR.classList.toggle('on', bar.scrollLeft < max - 4);
+  }
+
+  function scrollChipIntoView(chip) {
+    if (!chip) return;
+    var b = bar.getBoundingClientRect();
+    var c = chip.getBoundingClientRect();
+    var pad = parseInt(getComputedStyle(bar).paddingLeft, 10) || 0;
+    if (c.left < b.left + pad || c.right > b.right - pad) {
+      bar.scrollTo({ left: bar.scrollLeft + c.left - b.left - pad, behavior: 'smooth' });
+    }
+  }
+
+  bar.addEventListener('scroll', updateFades, { passive: true });
+  window.addEventListener('resize', updateFades);
+
+  // Mouse wheel scrolls the row sideways when it overflows
+  bar.addEventListener('wheel', function (e) {
+    if (bar.scrollWidth > bar.clientWidth && Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+      bar.scrollLeft += e.deltaY;
+      e.preventDefault();
+    }
+  }, { passive: false });
+
+  // Click-and-drag with a mouse (touch uses native swiping)
+  var dragging = false, dragged = false, startX = 0, startScroll = 0;
+  bar.addEventListener('pointerdown', function (e) {
+    if (e.pointerType !== 'mouse') return;
+    dragging = true; dragged = false;
+    startX = e.clientX; startScroll = bar.scrollLeft;
   });
-  // Close the phone menu on outside tap or Escape
-  document.addEventListener('click',function(e){if(links.classList.contains('open')&&!e.target.closest('.nav')){links.classList.remove('open');menuBtn.setAttribute('aria-expanded','false');}});
-  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&links.classList.contains('open')){links.classList.remove('open');menuBtn.setAttribute('aria-expanded','false');menuBtn.focus();}});
-
-
-  // Scroll spy: light up the chip for the chapter on screen
-  var chapters=['ch1','ch2','ch3','act'], current=null, ticking=false;
-  function spy(){
-    ticking=false;
-    if(river.hidden)return;
-    var line=bar.getBoundingClientRect().bottom+120, cur=null;
-    chapters.forEach(function(id){var el=document.getElementById(id);if(el&&!el.hidden&&el.getBoundingClientRect().top<=line)cur=id;});
-    if(cur===current)return;
-    current=cur;
-    document.querySelectorAll('[data-chip]').forEach(function(c){c.classList.toggle('active',c.dataset.chip===cur)});
-    var c=cur&&bar.querySelector('[data-chip="'+cur+'"]');
-    if(c){var bl=bar.getBoundingClientRect(),cl=c.getBoundingClientRect(),pad=parseInt(getComputedStyle(bar).paddingLeft);
-      if(cl.left<bl.left+pad||cl.right>bl.right-pad){bar.scrollTo({left:bar.scrollLeft+cl.left-bl.left-pad,behavior:'smooth'});}}
-  }
-  window.addEventListener('scroll',function(){if(!ticking){ticking=true;requestAnimationFrame(spy);}},{passive:true});
-  window.addEventListener('hashchange',function(){current=undefined;setTimeout(spy,60);});
-  menuBtn.addEventListener('click',function(){
-    var open=links.classList.toggle('open'); menuBtn.setAttribute('aria-expanded',String(open));
+  window.addEventListener('pointermove', function (e) {
+    if (!dragging) return;
+    var dx = e.clientX - startX;
+    if (Math.abs(dx) > 5) { dragged = true; bar.classList.add('dragging'); }
+    bar.scrollLeft = startScroll - dx;
   });
+  window.addEventListener('pointerup', function () {
+    dragging = false;
+    setTimeout(function () { bar.classList.remove('dragging'); }, 0);
+  });
+  // A drag should not count as a click on a chip
+  bar.addEventListener('click', function (e) {
+    if (dragged) { e.preventDefault(); dragged = false; }
+  }, true);
+
+  /* ---------- Menu and links ---------- */
+  menuBtn.addEventListener('click', function () {
+    var open = links.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', String(open));
+  });
+
+  document.addEventListener('click', function (e) {
+    // Close the phone menu when tapping outside it
+    if (links.classList.contains('open') && !e.target.closest('.nav')) closeMenu();
+    // Clicking a link to the section you're already on still scrolls there
+    var a = e.target.closest('a[href^="#"]');
+    if (a && a.getAttribute('href') === (location.hash || '#home')) {
+      e.preventDefault();
+      route();
+    }
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && links.classList.contains('open')) {
+      closeMenu();
+      menuBtn.focus();
+    }
+  });
+
+  window.addEventListener('hashchange', route);
+
+  /* ---------- Start ---------- */
   route();
-  setTimeout(function(){current=undefined;spy();if(typeof homeSpy==='function')homeSpy();},150);
+  updateFades();
+  setTimeout(updateHighlights, 150);
 })();
