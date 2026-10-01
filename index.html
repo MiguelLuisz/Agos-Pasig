@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -9,45 +9,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@1,600&family=Poppins:wght@600;700&display=swap">
-<link rel="stylesheet" href="assets/css/styles.css?v=d41ee23b">
+<link rel="stylesheet" href="assets/css/styles.css?v=606bdc54">
 </head>
 <body>
 <!-- Shared SVG symbols -->
 <svg class="svg-defs" width="0" height="0" aria-hidden="true">
   <defs>
-    <symbol id="logo" viewBox="0 0 48 44">
-      <path d="M24 2C24 2 9 18 9 27.5C9 36 15.7 42 24 42s15-6 15-14.5C39 18 24 2 24 2Z" fill="#2a7fc1"/>
-      <path d="M11.5 30c3.2-2.4 6.3-2.4 9.4 0s6.2 2.4 9.3 0 5.3-2.3 7.3-1.2" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/>
-      <path d="M13.5 35.5c2.7-2 5.4-2 8 0s5.4 2 8 0 4.4-1.9 5.8-1.1" fill="none" stroke="#c9d6e3" stroke-width="2" stroke-linecap="round"/>
-    </symbol>
-    <symbol id="chev" viewBox="0 0 20 20"><path d="M5 7.5l5 5 5-5" fill="none" stroke="#004f87" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-    <symbol id="skyline" viewBox="0 0 1440 480" preserveAspectRatio="xMidYMax slice">
-      <g fill="#0e2b44" opacity=".9">
-        <rect x="520" y="150" width="60" height="200"/><rect x="590" y="110" width="44" height="240"/><rect x="646" y="180" width="70" height="170"/>
-        <rect x="730" y="90" width="52" height="260"/><rect x="792" y="140" width="80" height="210"/><rect x="884" y="60" width="46" height="290"/>
-        <rect x="940" y="120" width="66" height="230"/><rect x="1016" y="170" width="54" height="180"/><rect x="1080" y="100" width="60" height="250"/>
-        <rect x="1150" y="150" width="84" height="200"/><rect x="1244" y="80" width="50" height="270"/><rect x="1304" y="130" width="72" height="220"/><rect x="1386" y="190" width="54" height="160"/>
-      </g>
-      <g fill="#1d4868" opacity=".8">
-        <rect x="560" y="230" width="70" height="120"/><rect x="700" y="210" width="90" height="140"/><rect x="860" y="240" width="60" height="110"/>
-        <rect x="1000" y="220" width="96" height="130"/><rect x="1180" y="235" width="80" height="115"/><rect x="1330" y="215" width="70" height="135"/>
-      </g>
-      <rect x="0" y="350" width="1440" height="130" fill="#123553"/>
-      <g stroke="#3f6f93" stroke-width="2" opacity=".6"><path d="M600 380h120M820 400h160M1060 372h110M1220 410h150M700 430h90M960 445h140"/></g>
-    </symbol>
-    <symbol id="debris" viewBox="0 0 1440 480" preserveAspectRatio="xMidYMid slice">
-      <rect width="1440" height="480" fill="#1b2a26"/>
-      <g fill="#3c4f47"><ellipse cx="300" cy="120" rx="240" ry="60"/><ellipse cx="1100" cy="90" rx="320" ry="70"/></g>
-      <g opacity=".75">
-        <rect x="620" y="250" width="200" height="54" rx="26" fill="#3e8a55" transform="rotate(-8 720 277)"/>
-        <rect x="440" y="230" width="150" height="60" rx="28" fill="#9fb2bd" transform="rotate(10 515 260)"/>
-        <rect x="920" y="200" width="120" height="70" rx="10" fill="#c8cfd2" transform="rotate(-14 980 235)"/>
-        <rect x="1140" y="270" width="160" height="80" rx="12" fill="#a8b4ba" transform="rotate(8 1220 310)"/>
-        <rect x="170" y="300" width="190" height="70" rx="12" fill="#bfc8cc" transform="rotate(-4 265 335)"/>
-        <circle cx="880" cy="340" r="30" fill="#d7dcde"/>
-      </g>
-    </symbol>
-  </defs>
+        <symbol id="chev" viewBox="0 0 20 20"><path d="M5 7.5l5 5 5-5" fill="none" stroke="#004f87" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+          </defs>
 </svg>
 
 <header class="nav">
@@ -56,7 +25,7 @@
       <img class="logo" src="assets/images/agos-pasig-logo.png" alt="">
       <span><span class="brand-name">Agos Pasig</span><span class="brand-tag">Water • Life • Future</span></span>
     </a>
-    <button class="menu-btn" id="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+    <button type="button" class="menu-btn" id="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
       <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
     </button>
     <nav class="links" id="nav-links">
@@ -68,7 +37,7 @@
 </header>
 
 <!-- ================= HOME ================= -->
-<main class="page" id="page-home">
+<main class="page" id="page-home" aria-label="Home">
   <section class="hero">
     <div class="photo"><img class="lqip lqip-pasig-river-aerial" fetchpriority="high" src="assets/images/pasig-river-aerial-1920.webp" srcset="assets/images/pasig-river-aerial-640.webp 640w, assets/images/pasig-river-aerial-1280.webp 1280w, assets/images/pasig-river-aerial-1920.webp 1920w, assets/images/pasig-river-aerial-2880.webp 2880w" sizes="100vw" decoding="async" alt=""></div>
     <div class="scrim"></div>
@@ -195,7 +164,7 @@
 
 
 <!-- ================= THE RIVER ================= -->
-<main class="page" id="page-river" hidden>
+<main class="page" id="page-river" aria-label="The River" hidden>
   <section class="hero">
     <div class="photo"><img class="lqip lqip-plastic-waste-in-river" src="assets/images/plastic-waste-in-river-1920.webp" srcset="assets/images/plastic-waste-in-river-640.webp 640w, assets/images/plastic-waste-in-river-1280.webp 1280w, assets/images/plastic-waste-in-river-1920.webp 1920w, assets/images/plastic-waste-in-river-2880.webp 2880w" sizes="100vw" decoding="async" alt=""></div>
     <div class="scrim"></div>
@@ -413,22 +382,22 @@
       <div class="grid-3">
         <a class="box chart" href="https://ncr.denr.gov.ph/wp-content/uploads/2026/01/ANNUAL-REPORT-2025.pdf" target="_blank" rel="noopener">
           <div class="top"><div><p class="name">Fecal coliform</p><p class="caption">MPN/100 mL · lower is better</p></div><span class="pill good">−43%</span></div>
-          <div class="bar-row"><div class="lbl"><span>2024</span><span>242,612</span></div><div class="track"><i class="prev" style="width:100%"></i></div></div>
-          <div class="bar-row"><div class="lbl"><span>2025</span><span>138,500</span></div><div class="track"><i style="width:57.1%"></i></div></div>
+          <div class="bar-row"><div class="lbl"><span>2024</span><span>242,612</span></div><div class="track"><i class="prev w-100"></i></div></div>
+          <div class="bar-row"><div class="lbl"><span>2025</span><span>138,500</span></div><div class="track"><i class="w-57"></i></div></div>
           <p><strong>Takeaway:</strong> Less fecal contamination, but the water is still not safe for contact.</p>
           <p class="src">Source: DENR-NCR (2025), p. 195 · <b>Visit source ↗</b></p>
         </a>
         <a class="box chart" href="https://ncr.denr.gov.ph/wp-content/uploads/2026/01/ANNUAL-REPORT-2025.pdf" target="_blank" rel="noopener">
           <div class="top"><div><p class="name">Dissolved oxygen</p><p class="caption">mg/L · higher is better</p></div><span class="pill good">+22%</span></div>
-          <div class="bar-row"><div class="lbl"><span>2024</span><span>3.01</span></div><div class="track"><i class="prev" style="width:82.2%"></i></div></div>
-          <div class="bar-row"><div class="lbl"><span>2025</span><span>3.66</span></div><div class="track"><i style="width:100%"></i></div></div>
+          <div class="bar-row"><div class="lbl"><span>2024</span><span>3.01</span></div><div class="track"><i class="prev w-82"></i></div></div>
+          <div class="bar-row"><div class="lbl"><span>2025</span><span>3.66</span></div><div class="track"><i class="w-100"></i></div></div>
           <p><strong>Takeaway:</strong> More oxygen for aquatic life, though stress remains across the system.</p>
           <p class="src">Source: DENR-NCR (2025), p. 195 · <b>Visit source ↗</b></p>
         </a>
         <a class="box chart" href="https://ncr.denr.gov.ph/wp-content/uploads/2026/01/ANNUAL-REPORT-2025.pdf" target="_blank" rel="noopener">
           <div class="top"><div><p class="name">Biochemical oxygen demand (BOD)</p><p class="caption">mg/L · lower is better</p></div><span class="pill bad">+29%</span></div>
-          <div class="bar-row"><div class="lbl"><span>2024</span><span>6.32</span></div><div class="track"><i class="prev" style="width:77.3%"></i></div></div>
-          <div class="bar-row"><div class="lbl"><span>2025</span><span>8.18</span></div><div class="track"><i style="width:100%"></i></div></div>
+          <div class="bar-row"><div class="lbl"><span>2024</span><span>6.32</span></div><div class="track"><i class="prev w-77"></i></div></div>
+          <div class="bar-row"><div class="lbl"><span>2025</span><span>8.18</span></div><div class="track"><i class="w-100"></i></div></div>
           <p><strong>Takeaway:</strong> More organic pollution, leaving less oxygen for aquatic life.</p>
           <p class="src">Source: DENR-NCR (2025), p. 195 · <b>Visit source ↗</b></p>
         </a>
@@ -541,6 +510,6 @@
   </div>
   <div class="bottom"><div class="wrap">© 2026 Agos Pasig. A student project for GE - A2101, Mapúa Malayan Digital College. Sources are listed on each page.</div></div>
 </footer>
-<script src="assets/js/main.js?v=d41ee23b"></script>
+<script src="assets/js/main.js?v=606bdc54"></script>
 </body>
 </html>
