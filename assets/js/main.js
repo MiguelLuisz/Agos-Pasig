@@ -88,7 +88,7 @@
     ticking=false;
     if(river.hidden)return;
     var line=bar.getBoundingClientRect().bottom+120, cur=null;
-    chapters.forEach(function(id){var el=document.getElementById(id);if(el&&el.getBoundingClientRect().top<=line)cur=id;});
+    chapters.forEach(function(id){var el=document.getElementById(id);if(el&&!el.hidden&&el.getBoundingClientRect().top<=line)cur=id;});
     if(cur===current)return;
     current=cur;
     document.querySelectorAll('[data-chip]').forEach(function(c){c.classList.toggle('active',c.dataset.chip===cur)});
