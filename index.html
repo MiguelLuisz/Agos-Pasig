@@ -9,17 +9,18 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@1,600&family=Poppins:wght@600;700&display=swap">
-<link rel="stylesheet" href="assets/css/styles.css?v=606bdc54">
+<link rel="stylesheet" href="assets/css/styles.css?v=e5965b8b">
 </head>
 <body>
 <!-- Shared SVG symbols -->
 <svg class="svg-defs" width="0" height="0" aria-hidden="true">
   <defs>
-        <symbol id="chev" viewBox="0 0 20 20"><path d="M5 7.5l5 5 5-5" fill="none" stroke="#004f87" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+        <symbol id="chev" viewBox="0 0 20 20"><path d="M5 7.5l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
           </defs>
 </svg>
 
 <header class="nav">
+  <div class="progress" aria-hidden="true"><span></span></div>
   <div class="wrap">
     <a class="brand" href="#home" aria-label="Agos Pasig home">
       <img class="logo" src="assets/images/agos-pasig-logo.png" alt="">
@@ -56,16 +57,16 @@
     <div class="wrap">
       <div class="heading">
         <p class="overline">How this site works</p>
-        <h2 class="h2">One river, three chapters</h2>
-        <p class="lead">The River page tells the story in three chapters. Read them in order, or jump to the one you need. Every figure is credited to a source.</p>
+        <h2 class="h2">One river, four chapters</h2>
+        <p class="lead">The River page tells the story in four chapters. Read them in order, or jump to the one you need. Every figure is credited to a source.</p>
       </div>
-      <div class="grid-3">
+      <div class="grid-4 chapters">
         <a class="card" href="#ch1">
           <div class="img"><img class="lqip lqip-plastic-waste-in-river" src="assets/images/plastic-waste-in-river-1280.webp" srcset="assets/images/plastic-waste-in-river-640.webp 640w, assets/images/plastic-waste-in-river-1280.webp 1280w" sizes="(max-width:820px) 100vw, 384px" decoding="async" alt="Plastic bottles and foam containers floating in polluted water" loading="lazy"></div>
           <div class="body">
             <p class="overline">Chapter 1 · What it is</p>
             <h3 class="h3">What is the Pasig River?</h3>
-            <p class="muted">Its size, route, and how it went from a lifeline to “biologically dead.”</p>
+            <p class="muted">Its size, route, and how it became “biologically dead.”</p>
             <p class="more">27 km · Read chapter 1 →</p>
           </div>
         </a>
@@ -74,7 +75,7 @@
           <div class="body">
             <p class="overline">Chapter 2 · The problem</p>
             <h3 class="h3">What pollutes it, and what does that harm?</h3>
-            <p class="muted">The four main sources of pollution and their effects on wildlife, people, and Manila Bay.</p>
+            <p class="muted">Four main pollution sources and what they harm.</p>
             <p class="more">65% from households · Read chapter 2 →</p>
           </div>
         </a>
@@ -83,8 +84,17 @@
           <div class="body">
             <p class="overline">Chapter 3 · Progress</p>
             <h3 class="h3">Is it getting better?</h3>
-            <p class="muted">The latest water-quality data, what is being done, and what you can do.</p>
+            <p class="muted">Latest water data, wildlife findings, and cleanup efforts.</p>
             <p class="more">−43% fecal coliform · Read chapter 3 →</p>
+          </div>
+        </a>
+        <a class="card" href="#ch4">
+          <div class="img"><img class="lqip lqip-workers-clearing-river-boom" src="assets/images/workers-clearing-river-boom-1280.webp" srcset="assets/images/workers-clearing-river-boom-640.webp 640w, assets/images/workers-clearing-river-boom-1280.webp 1080w" sizes="(max-width:820px) 100vw, 300px" decoding="async" alt="Workers removing trash caught by a river boom" loading="lazy"></div>
+          <div class="body">
+            <p class="overline">Chapter 4 · Solutions</p>
+            <h3 class="h3">Which solution can last?</h3>
+            <p class="muted">Four programs compared, and which one can last.</p>
+            <p class="more">4 programs compared · Read chapter 4 →</p>
           </div>
         </a>
       </div>
@@ -115,8 +125,8 @@
         <figcaption class="photo-credit">Guadalupe Bridge over the Pasig River. Photo: Getty Images via Tatler Asia</figcaption>
       </figure>
       <div class="p-body">
-        <p><strong>Agos</strong> means “flow” in Filipino. We chose it because the Pasig River’s future depends on what flows into it, from homes, factories, and streets across Metro Manila.</p>
-        <p>The Pasig River is a 27-kilometer river at the heart of Manila’s history. Decades of urbanization polluted it, but it is slowly recovering. Agos Pasig is a student project that explains its story and shows how communities can help restore it.</p>
+        <p><strong>Agos</strong> means “flow” in Filipino. The river’s future depends on what flows into it from homes, factories, and streets.</p>
+        <p>The 27-kilometer Pasig River sits at the heart of Manila’s history. Decades of urbanization polluted it, but it’s slowly recovering. Agos Pasig tells its story and shows how communities can help.</p>
         <blockquote class="pull">We believe nature and urban progress can coexist, and the Pasig River can prove it.</blockquote>
       </div>
     </div>
@@ -129,7 +139,7 @@
         <h2 class="h2">Our approach</h2>
       </div>
       <div class="grid-3">
-        <div class="box"><h3 class="h3">Sourced figures only</h3><p class="muted">Every number is credited to a source, listed in the Sources bar at the bottom of its page.</p></div>
+        <div class="box"><h3 class="h3">Sourced figures only</h3><p class="muted">Every number is credited to a source at the bottom of its page.</p></div>
         <div class="box"><h3 class="h3">Official data first</h3><p class="muted">We rely on DENR, ADB, and peer-reviewed studies wherever possible.</p></div>
         <div class="box"><h3 class="h3">Disputed claims are labeled</h3><p class="muted">When a finding is contested, like the 2021 ocean-plastic ranking, we say so.</p></div>
       </div>
@@ -172,7 +182,7 @@
       <div class="hero-content">
         <p class="overline">The River</p>
         <h1>The Pasig River story</h1>
-        <p class="sub">Three chapters: what the river is, what is wrong with it, and whether it is recovering.</p>
+        <p class="sub">Four chapters: what the river is, what is wrong with it, whether it is recovering, and which solution can last.</p>
       </div>
     </div>
     <svg class="wave" viewBox="0 0 1440 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0 22C240 4 480 4 720 16s480 20 720 0V40H0Z" fill="#fff"/></svg>
@@ -183,7 +193,7 @@
       <a class="chip" href="#ch1" data-chip="ch1">1 · What it is</a>
       <a class="chip" href="#ch2" data-chip="ch2">2 · The problem</a>
       <a class="chip" href="#ch3" data-chip="ch3">3 · Progress</a>
-      <a class="chip" href="#act" data-chip="act" hidden>What you can do</a>
+      <a class="chip" href="#ch4" data-chip="ch4">4 · Solutions</a>
     </div>
     <span class="fade l" aria-hidden="true"></span><span class="fade r" aria-hidden="true"></span>
   </div>
@@ -192,14 +202,14 @@
   <section class="section" id="ch1">
     <div class="wrap">
       <div class="heading">
-        <p class="overline">Chapter 1 of 3 · What it is</p>
+        <p class="overline">Chapter 1 of 4 · What it is</p>
         <h2 class="h2">What is the Pasig River?</h2>
         <p class="lead">The river links Laguna de Bay to Manila Bay. Its location makes it important at both a national and regional level.</p>
       </div>
       <div class="grid-4">
         <a class="box" href="https://www.adb.org/results/country-water-action-resuscitating-pasig-river" target="_blank" rel="noopener"><p class="overline">Length</p><h3 class="h3">About 27 km</h3><p class="muted">From Laguna de Bay, through the Napindan Channel, to Manila Bay.</p><p class="src">Source: ADB (2009) · <b>Visit source ↗</b></p></a>
         <a class="box" href="https://kanto.ph/voices/pasig-river-national-cultural-treasure/" target="_blank" rel="noopener"><p class="overline">Route</p><h3 class="h3">5 cities</h3><p class="muted">Taguig, Pasig, Makati, Mandaluyong, and Manila.</p><p class="src">Source: Kanto (2022) · <b>Visit source ↗</b></p></a>
-        <a class="box" href="https://kanto.ph/voices/pasig-river-national-cultural-treasure/" target="_blank" rel="noopener"><p class="overline">Tributaries</p><h3 class="h3">Marikina &amp; San Juan</h3><p class="muted">Formed where the Marikina River meets the Napindan Channel. The San Juan River also feeds it.</p><p class="src">Source: Kanto (2022) · <b>Visit source ↗</b></p></a>
+        <a class="box" href="https://kanto.ph/voices/pasig-river-national-cultural-treasure/" target="_blank" rel="noopener"><p class="overline">Tributaries</p><h3 class="h3">Marikina &amp; San Juan</h3><p class="muted">Fed by the Marikina River, Napindan Channel, and San Juan River.</p><p class="src">Source: Kanto (2022) · <b>Visit source ↗</b></p></a>
         <a class="box" href="https://kanto.ph/voices/pasig-river-national-cultural-treasure/" target="_blank" rel="noopener"><p class="overline">Width &amp; depth</p><h3 class="h3">91 m · 0.5–5.5 m</h3><p class="muted">Average width. Deepest between the Guadalupe and C6 bridges.</p><p class="src">Source: Kanto (2022) · <b>Visit source ↗</b></p></a>
       </div>
     </div>
@@ -298,7 +308,7 @@
     <div class="scrim"></div>
     <div class="wrap">
       <div class="hero-content">
-        <p class="overline">Chapter 2 of 3</p>
+        <p class="overline">Chapter 2 of 4</p>
         <h1>What pollutes the river, and what does that harm?</h1>
         <p class="sub">Most pollution starts on land. It then harms wildlife, nearby communities, and Manila Bay.</p>
       </div>
@@ -364,7 +374,7 @@
     <div class="scrim"></div>
     <div class="wrap">
       <div class="hero-content">
-        <p class="overline">Chapter 3 of 3</p>
+        <p class="overline">Chapter 3 of 4</p>
         <h1>Is the river getting better?</h1>
         <p class="sub">Partly. Some water-quality indicators improved in 2025, while others got worse.</p>
       </div>
@@ -414,9 +424,9 @@
         <p class="lead">Findings from DENR-NCR’s 2025 biodiversity assessment.</p>
       </div>
       <div class="grid-3">
-        <a class="find" href="https://ncr.denr.gov.ph/wp-content/uploads/2026/01/ANNUAL-REPORT-2025.pdf" target="_blank" rel="noopener"><h3 class="h3">Fish survive, but the mix has changed</h3><p class="d">Introduced janitor fish dominate. Native Manila sea catfish and bluespot mullet remain but are threatened.</p><p class="src">Source: DENR-NCR (2025) · <b>Visit source ↗</b></p></a>
+        <a class="find" href="https://ncr.denr.gov.ph/wp-content/uploads/2026/01/ANNUAL-REPORT-2025.pdf" target="_blank" rel="noopener"><h3 class="h3">Fish survive, but the mix has changed</h3><p class="d">Invasive janitor fish dominate. Native catfish and mullet are threatened.</p><p class="src">Source: DENR-NCR (2025) · <b>Visit source ↗</b></p></a>
         <a class="find" href="https://ncr.denr.gov.ph/wp-content/uploads/2026/01/ANNUAL-REPORT-2025.pdf" target="_blank" rel="noopener"><h3 class="h3">Algae show hidden stress</h3><p class="d">Pollution-tolerant algae linked to nutrient-rich, low-oxygen water were recorded in the river.</p><p class="src">Source: DENR-NCR (2025) · <b>Visit source ↗</b></p></a>
-        <a class="find" href="https://ncr.denr.gov.ph/wp-content/uploads/2026/01/ANNUAL-REPORT-2025.pdf" target="_blank" rel="noopener"><h3 class="h3">Tributaries matter too</h3><p class="d">Phytoplankton in major and minor tributaries were severely affected, so recovery must include the whole system.</p><p class="src">Source: DENR-NCR (2025) · <b>Visit source ↗</b></p></a>
+        <a class="find" href="https://ncr.denr.gov.ph/wp-content/uploads/2026/01/ANNUAL-REPORT-2025.pdf" target="_blank" rel="noopener"><h3 class="h3">Tributaries matter too</h3><p class="d">Tributary phytoplankton were hit hard, so recovery must cover the whole system.</p><p class="src">Source: DENR-NCR (2025) · <b>Visit source ↗</b></p></a>
       </div>
       <p class="caption section-note">Source: DENR-NCR (2025)</p>
     </div>
@@ -431,48 +441,247 @@
       <div class="grid-3">
         <a class="card" href="https://www.riverrecycle.com/projects/pasig-river-cleanup-with-ictsi-foundation/" target="_blank" rel="noopener">
           <div class="img"><img class="lqip lqip-riverrecycle-floating-barrier" src="assets/images/riverrecycle-floating-barrier-1280.webp" srcset="assets/images/riverrecycle-floating-barrier-640.webp 640w, assets/images/riverrecycle-floating-barrier-1280.webp 1024w" sizes="(max-width:820px) 100vw, 384px" decoding="async" alt="Floating barrier collecting waste on the San Juan River" loading="lazy"></div>
-          <div class="body"><p class="overline">Cleanup · Since 2023</p><h3 class="h3">Plastic caught before the bay</h3><p class="muted">RiverRecycle and the ICTSI Foundation collect waste on the San Juan River, then recycle plastic into boards that can replace plywood, at over 1,000 kg per day.</p><p class="src">Source: RiverRecycle (n.d.) · <b>Visit source ↗</b></p></div>
+          <div class="body"><p class="overline">Cleanup · Since 2023</p><h3 class="h3">Plastic caught before the bay</h3><p class="muted">RiverRecycle and the ICTSI Foundation turn San Juan River plastic into plywood-like boards, over 1,000 kg a day.</p><p class="src">Source: RiverRecycle (n.d.) · <b>Visit source ↗</b></p></div>
         </a>
         <a class="card" href="https://www.dbm.gov.ph/index.php/management-2/580-prrc-highlights-milestones-and-priority-rehabilitation-activities-for-the-pasig-river-system" target="_blank" rel="noopener">
           <div class="img"><img class="lqip lqip-workers-clearing-river-boom" src="assets/images/workers-clearing-river-boom-1280.webp" srcset="assets/images/workers-clearing-river-boom-640.webp 640w, assets/images/workers-clearing-river-boom-1280.webp 1080w" sizes="(max-width:820px) 100vw, 384px" decoding="async" alt="Workers removing trash caught by a river boom" loading="lazy"></div>
-          <div class="body"><p class="overline">Rehabilitation · As of 2019</p><h3 class="h3">19 km dredged, 30 million kg removed</h3><p class="muted">The Pasig River Rehabilitation Commission also relocated 19,000 riverside families and cleared 508 structures from easements.</p><p class="src">Source: PRRC via DBM (2019) · <b>Visit source ↗</b></p></div>
+          <div class="body"><p class="overline">Rehabilitation · As of 2019</p><h3 class="h3">19 km dredged, 30 million kg removed</h3><p class="muted">The PRRC also relocated 19,000 riverside families and cleared 508 structures.</p><p class="src">Source: PRRC via DBM (2019) · <b>Visit source ↗</b></p></div>
         </a>
         <a class="card" href="https://pia.gov.ph/news/pbbm-launches-third-phase-of-pasig-river-rehabilitation-project/" target="_blank" rel="noopener">
           <div class="img"><img class="lqip lqip-cleanup-crew-bagging-plastic" src="assets/images/cleanup-crew-bagging-plastic-1280.webp" srcset="assets/images/cleanup-crew-bagging-plastic-640.webp 640w, assets/images/cleanup-crew-bagging-plastic-1280.webp 1000w" sizes="(max-width:820px) 100vw, 384px" decoding="async" alt="Cleanup crew bagging plastic waste from the river" loading="lazy"></div>
-          <div class="body"><p class="overline">Public spaces · 2025</p><h3 class="h3">Riverbanks reopened to people</h3><p class="muted">Phase 3 of the rehabilitation project opened at Plaza Mexico, Intramuros. In 2026, DENR also signed a five-year cleanup agreement with The Ocean Cleanup.</p><p class="src">Source: PIA (2025); IAC-PRUD (2025); The Ocean Cleanup (2026) · <b>Visit source ↗</b></p></div>
+          <div class="body"><p class="overline">Public spaces · 2025</p><h3 class="h3">Riverbanks reopened to people</h3><p class="muted">Phase 3 opened at Plaza Mexico, Intramuros. In 2026, DENR signed a five-year deal with The Ocean Cleanup.</p><p class="src">Source: PIA (2025); IAC-PRUD (2025); The Ocean Cleanup (2026) · <b>Visit source ↗</b></p></div>
         </a>
       </div>
     </div>
   </section>
 
-  <section class="section" id="act" hidden>
+  <!-- Chapter 4 -->
+  <section class="hero chapter" id="ch4">
+    <div class="photo"><img class="lqip lqip-guadalupe-bridge-aerial" src="assets/images/guadalupe-bridge-aerial-1920.webp" srcset="assets/images/guadalupe-bridge-aerial-640.webp 640w, assets/images/guadalupe-bridge-aerial-1280.webp 1280w, assets/images/guadalupe-bridge-aerial-1920.webp 1920w, assets/images/guadalupe-bridge-aerial-2880.webp 2880w" sizes="100vw" decoding="async" alt="" loading="lazy"></div>
+    <div class="scrim"></div>
+    <div class="wrap">
+      <div class="hero-content">
+        <p class="overline">Chapter 4 of 4</p>
+        <h1>Which solution can last?</h1>
+        <p class="sub">Four programs are already working on the Pasig River. We compared them and found one that prevents pollution instead of just cleaning it up.</p>
+      </div>
+    </div>
+    <svg class="wave" viewBox="0 0 1440 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0 22C240 4 480 4 720 16s480 20 720 0V40H0Z" fill="#fff"/></svg>
+  </section>
+
+  <section class="section">
     <div class="wrap">
       <div class="heading">
-        <p class="overline">What needs to happen next</p>
+        <p class="overline">Existing solutions</p>
+        <h2 class="h2">Four programs already at work</h2>
+        <p class="lead">A quick look at each program. Open “Details” for how it works, or “Assessment” for how it rates.</p>
+      </div>
+      <div class="sol-grid">
+
+        <article class="sol">
+          <div class="sol-head"><span class="sol-num" aria-hidden="true">1</span><div><h3 class="h3">River Cleanup and Rehabilitation</h3><p class="sol-tag">“Pasig Bigyang Buhay Muli” (PBBM)</p></div></div>
+          <p class="sol-key">Led by DENR-NCR and the PRCMO</p>
+          <p class="sol-sum">Cleans up waste and tracks water quality, but can’t stop new pollution from flowing in.</p>
+          <div class="sol-drops">
+            <details class="facir">
+              <summary>Details<svg width="20" height="20" aria-hidden="true"><use href="#chev"/></svg></summary>
+              <div class="facir-body">
+                <dl class="sol-facts">
+            <div><dt>Current status</dt><dd>The Pasig River rehabilitation has grown into a large, multi-sector program anchored by the ongoing “Pasig Bigyang Buhay Muli” urban development initiative.</dd></div>
+            <div><dt>How it works</dt><dd>DENR-NCR runs river cleanups and water-quality monitoring to remove built-up waste and track the river’s condition. Communities and several agencies take part, but lasting recovery also requires stopping untreated wastewater and garbage from entering the river.</dd></div>
+            <div><dt>Results so far</dt><dd>A technology-driven, multi-agency effort led by DENR-NCR and the PRCMO. It focuses on advanced waste interception and AI technology, links the river to infrastructure and tourism, and sets long-term pollution prevention measures.</dd></div>
+          </dl>
+                <button type="button" class="facir-close">Show less<svg width="20" height="20" aria-hidden="true"><use href="#chev"/></svg></button>
+              </div>
+            </details>
+            <details class="facir">
+              <summary>Assessment<svg width="20" height="20" aria-hidden="true"><use href="#chev"/></svg></summary>
+              <div class="facir-body">
+                <dl>
+              <div><dt>Feasible</dt><dd>DENR-NCR, the PRCMO, and other agencies can coordinate cleanup, monitoring, and rehabilitation work.</dd></div>
+              <div><dt>Accurate</dt><dd>Water-quality monitoring helps assess the river’s condition and track environmental changes.</dd></div>
+              <div><dt>Comprehensible</dt><dd>Cleanups and water-quality testing are easy-to-understand ways to address visible waste and pollution.</dd></div>
+              <div><dt>Inspiring</dt><dd>It encourages government agencies and communities to work together toward a cleaner Pasig River.</dd></div>
+              <div><dt>Robust</dt><dd>It combines cleanup, technology, and infrastructure, but long-term success needs wastewater control, steady funding, and consistent enforcement.</dd></div>
+            </dl>
+                <button type="button" class="facir-close">Show less<svg width="20" height="20" aria-hidden="true"><use href="#chev"/></svg></button>
+              </div>
+            </details>
+          </div>
+          <p class="src">Sources: <a href="https://pco.gov.ph/news_releases/pbbm-reveals-more-projects-for-pasig-river-manila-redevelopment/" target="_blank" rel="noopener">PCO (n.d.) ↗</a> · <a href="https://www.iwa-network.org/manila-philippines" target="_blank" rel="noopener">IWA (n.d.) ↗</a></p>
+        </article>
+
+        <article class="sol featured">
+          <div class="sol-head"><span class="sol-num" aria-hidden="true">2</span><div><h3 class="h3">Wastewater Treatment and Environmental Enforcement</h3><p class="sol-tag">Manila Water, Maynilad, PRCMO, and the EPR Act</p><span class="badge">Most sustainable</span></div></div>
+          <p class="sol-key">41 plants · 410+ million liters a day</p>
+          <p class="sol-sum">Treats household and industrial sewage before it reaches the river, backed by monitoring and penalties.</p>
+          <div class="sol-drops">
+            <details class="facir">
+              <summary>Details<svg width="20" height="20" aria-hidden="true"><use href="#chev"/></svg></summary>
+              <div class="facir-body">
+                <dl class="sol-facts">
+            <div><dt>Current status</dt><dd>Manila Water runs 41 wastewater treatment plants with a combined capacity of over 410 million liters per day, and Maynilad has invested over ₱46 billion in sewerage improvements. Untreated household sewage is still a major source of pollution because many homes have no sewer connection, and heavy rain carries wastewater and garbage into waterways. DENR is also partnering with The Ocean Cleanup on automated trash interceptors, and the EPR Act pushes companies to manage their plastic packaging waste.</dd></div>
+            <div><dt>How it works</dt><dd>The PRCMO tests water quality and checks that industries comply with wastewater rules. Manila Water and Maynilad keep expanding their treatment facilities so household and industrial sewage is treated before it reaches waterways.</dd></div>
+            <div><dt>Results so far</dt><dd>Millions of liters of wastewater are treated every day, which reduces pollution in the Pasig River. Homes without sewer connections still release untreated sewage that keeps bacteria levels high, and heavy rain still washes waste into the river. Trash interceptors and the EPR Law help keep garbage from clogging treatment facilities.</dd></div>
+          </dl>
+                <button type="button" class="facir-close">Show less<svg width="20" height="20" aria-hidden="true"><use href="#chev"/></svg></button>
+              </div>
+            </details>
+            <details class="facir">
+              <summary>Assessment<svg width="20" height="20" aria-hidden="true"><use href="#chev"/></svg></summary>
+              <div class="facir-body">
+                <dl>
+              <div><dt>Feasible</dt><dd>Water concessionaires already run treatment plants, although expanding sewer connections takes significant investment.</dd></div>
+              <div><dt>Accurate</dt><dd>Treating wastewater before it is released directly targets sewage pollution, and water-quality testing tracks pollution levels.</dd></div>
+              <div><dt>Comprehensible</dt><dd>It is easy to understand: dirty water is treated before it enters rivers and other waterways.</dd></div>
+              <div><dt>Inspiring</dt><dd>Better sanitation and cleaner waterways can encourage communities and industries to support pollution prevention.</dd></div>
+              <div><dt>Robust</dt><dd>It tackles a major source of pollution, but it is limited by homes without sewer connections and untreated wastewater during heavy rain.</dd></div>
+            </dl>
+                <button type="button" class="facir-close">Show less<svg width="20" height="20" aria-hidden="true"><use href="#chev"/></svg></button>
+              </div>
+            </details>
+          </div>
+          <p class="src">Sources: <a href="https://newsinfo.inquirer.net/2267083/manila-water-expands-sewer-coverage-in-pasig-to-advance-public-health" target="_blank" rel="noopener">Inquirer (2026) ↗</a> · <a href="https://newsinfo.inquirer.net/2307668/manila-water-expands-sewer-network-to-500-km-as-of-july-2026" target="_blank" rel="noopener">Inquirer (2026) ↗</a></p>
+        </article>
+
+        <article class="sol">
+          <div class="sol-head"><span class="sol-num" aria-hidden="true">3</span><div><h3 class="h3">Solid Waste Management and Plastic Waste Reduction</h3><p class="sol-tag">Extended Producer Responsibility (EPR) Act of 2022</p></div></div>
+          <p class="sol-key">155 show-cause letters issued (Aug 2026)</p>
+          <p class="sol-sum">Makes companies recover and recycle their plastic packaging so it stays out of waterways.</p>
+          <div class="sol-drops">
+            <details class="facir">
+              <summary>Details<svg width="20" height="20" aria-hidden="true"><use href="#chev"/></svg></summary>
+              <div class="facir-body">
+                <dl class="sol-facts">
+            <div><dt>Current status</dt><dd>The EPR Act of 2022 requires covered companies to recover and manage their plastic packaging waste through recycling and recovery programs. In August 2026, the government issued 155 show-cause letters to companies that may be violating EPR requirements. Stronger enforcement and proper waste management are still needed to keep plastic out of rivers.</dd></div>
+            <div><dt>How it works</dt><dd>Covered companies must collect, recycle, and recover their plastic packaging waste. LGUs and communities help through waste segregation, proper disposal, and organized collection, while environmental agencies monitor compliance, especially to keep waste out of waterways during heavy rain and flooding.</dd></div>
+            <div><dt>Results so far</dt><dd>The program pushes companies to collect, reuse, and recycle plastic packaging, helping reduce pollution in the Pasig River and prevent clogged drainage. The 155 show-cause letters show that compliance is being monitored, but real impact still has to be measured through verified recovery and recycling data.</dd></div>
+          </dl>
+                <button type="button" class="facir-close">Show less<svg width="20" height="20" aria-hidden="true"><use href="#chev"/></svg></button>
+              </div>
+            </details>
+            <details class="facir">
+              <summary>Assessment<svg width="20" height="20" aria-hidden="true"><use href="#chev"/></svg></summary>
+              <div class="facir-body">
+                <dl>
+              <div><dt>Feasible</dt><dd>Businesses can work with recyclers, waste collectors, local governments, and communities to recover plastic waste.</dd></div>
+              <div><dt>Accurate</dt><dd>Recovery reports and recycling data can measure progress, but 155 show-cause letters alone do not prove river pollution has gone down.</dd></div>
+              <div><dt>Comprehensible</dt><dd>It is clear: companies must take responsibility for the plastic packaging their products create.</dd></div>
+              <div><dt>Inspiring</dt><dd>It encourages businesses and communities to reduce waste, recycle, and dispose of trash responsibly.</dd></div>
+              <div><dt>Robust</dt><dd>It can cut the plastic entering waterways, but long-term results depend on enforcement, verified recovery, and public participation.</dd></div>
+            </dl>
+                <button type="button" class="facir-close">Show less<svg width="20" height="20" aria-hidden="true"><use href="#chev"/></svg></button>
+              </div>
+            </details>
+          </div>
+          <p class="src">Sources: <a href="https://lawphil.net/statutes/repacts/ra2022/ra_11898_2022.html" target="_blank" rel="noopener">RA 11898 (2022) ↗</a> · <a href="https://pco.gov.ph/news_releases/marcos-admin-warns-companies-of-their-obligations-under-extended-producer-responsibility-act-of-2022/" target="_blank" rel="noopener">PCO (2026) ↗</a></p>
+        </article>
+
+        <article class="sol">
+          <div class="sol-head"><span class="sol-num" aria-hidden="true">4</span><div><h3 class="h3">Manila Bay Clean-Up, Rehabilitation, and Preservation Program</h3><p class="sol-tag">Supreme Court continuing mandamus</p></div></div>
+          <p class="sol-key">178 LGUs · only 15% sewer coverage in NCR</p>
+          <p class="sol-sum">A Supreme Court–ordered program coordinating agencies and LGUs across the whole Manila Bay watershed.</p>
+          <div class="sol-drops">
+            <details class="facir">
+              <summary>Details<svg width="20" height="20" aria-hidden="true"><use href="#chev"/></svg></summary>
+              <div class="facir-body">
+                <dl class="sol-facts">
+            <div><dt>Current status</dt><dd>Still ongoing since the Supreme Court’s 2008 order requiring 13 government agencies to rehabilitate Manila Bay and its connected rivers, including the Pasig–Marikina–San Juan river system. In December 2025, DILG-NCR held a stakeholders’ forum to review progress, identify challenges, and improve coordination among LGUs.</dd></div>
+            <div><dt>How it works</dt><dd>It runs in three phases: (1) cleaning waterways, reducing pollution, repairing sewer lines, and improving waste management; (2) rehabilitating sewer systems, expanding wastewater treatment, and addressing informal settlements along waterways; and (3) public education, law enforcement, and water-quality monitoring. Illegal structures along river easements are also removed, with LGUs doing the work under DENR and DILG monitoring.</dd></div>
+            <div><dt>Results so far</dt><dd>The program covers 178 LGUs across NCR, Region III, and Region IV-A, and 135 of them (76%) have approved 10-year solid waste management plans. But only about 15% of NCR’s water-served population is connected to sewerage, around 233,000 informal settler families live along waterways, and the Pasig River is still unsafe for swimming.</dd></div>
+          </dl>
+                <button type="button" class="facir-close">Show less<svg width="20" height="20" aria-hidden="true"><use href="#chev"/></svg></button>
+              </div>
+            </details>
+            <details class="facir">
+              <summary>Assessment<svg width="20" height="20" aria-hidden="true"><use href="#chev"/></svg></summary>
+              <div class="facir-body">
+                <dl>
+              <div><dt>Feasible</dt><dd>Possible through cooperation among agencies and 178 LGUs, but sewerage expansion and relocating informal settler families take a lot of time and resources.</dd></div>
+              <div><dt>Accurate</dt><dd>Water-quality monitoring and tracking waste management plans help measure progress, though the data show major pollution problems remain.</dd></div>
+              <div><dt>Comprehensible</dt><dd>It uses clear approaches: waterway cleanup, sewerage improvements, waste management, and public education.</dd></div>
+              <div><dt>Inspiring</dt><dd>The Supreme Court order and agency cooperation encourage continued action toward cleaner waterways and Manila Bay.</dd></div>
+              <div><dt>Robust</dt><dd>It tackles several connected sources of pollution, but lasting results need long-term funding, enforcement, wider sewer coverage, and public participation.</dd></div>
+            </dl>
+                <button type="button" class="facir-close">Show less<svg width="20" height="20" aria-hidden="true"><use href="#chev"/></svg></button>
+              </div>
+            </details>
+          </div>
+          <p class="src">Sources: <a href="https://denr.gov.ph/?p=390" target="_blank" rel="noopener">DENR (n.d.) ↗</a> · <a href="https://ncr.dilg.gov.ph/dilg-ncr-reaffirms-unified-action-for-manila-bay-rehabilitation-at-2025-stakeholders-forum/" target="_blank" rel="noopener">DILG-NCR (2025) ↗</a></p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-sky">
+    <div class="wrap">
+      <div class="heading">
+        <p class="overline">Comparative analysis</p>
+        <h2 class="h2">How the four solutions compare</h2>
+        <p class="lead">Each one helps, but each has a limit. The question is which limit is easiest to overcome.</p>
+      </div>
+      <div class="compare-wrap">
+        <table class="compare">
+          <thead><tr><th scope="col">Existing solution</th><th scope="col">What it does</th><th scope="col">Main limitation</th></tr></thead>
+          <tbody>
+            <tr><th scope="row"><span class="cmp-num">1</span>River Cleanup and Rehabilitation</th><td data-label="What it does">Removes waste, monitors water quality, and restores the river through government and community efforts.</td><td data-label="Main limitation">Cannot prevent pollution if garbage and untreated wastewater keep entering the river.</td></tr>
+            <tr class="featured"><th scope="row"><span class="cmp-num">2</span>Wastewater Treatment and Environmental Enforcement<span class="badge">Most sustainable</span></th><td data-label="What it does">Treats wastewater and monitors compliance to reduce harmful discharges into waterways.</td><td data-label="Main limitation">Needs significant funding, maintenance, and wider sewerage coverage.</td></tr>
+            <tr><th scope="row"><span class="cmp-num">3</span>Solid Waste Management and Plastic Waste Reduction</th><td data-label="What it does">Promotes plastic recovery, recycling, and proper waste disposal through the EPR Act.</td><td data-label="Main limitation">Depends on public participation, accessible collection services, and consistent enforcement.</td></tr>
+            <tr><th scope="row"><span class="cmp-num">4</span>Manila Bay Cleanup and Rehabilitation Program</th><td data-label="What it does">Coordinates agencies and LGUs to reduce pollution across the watershed and connected rivers.</td><td data-label="Main limitation">Faces challenges in coordination, wastewater treatment, and waste management infrastructure.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section on-dark" id="sustainable">
+    <div class="wrap split">
+      <div class="col">
+        <p class="overline">Why Solution 2 is sustainable</p>
+        <h2 class="h2">Stop the pollution before it reaches the river</h2>
+        <p class="body-large why-intro">Treating wastewater before it enters the Pasig River prevents pollution for the long term.</p>
+      </div>
+      <ul class="reasons">
+        <li><strong>Prevents pollution at its source</strong><span>Less harmful waste enters the river.</span></li>
+        <li><strong>Provides continuous protection</strong><span>Treatment plants run every day.</span></li>
+        <li><strong>Ensures accountability</strong><span>Monitoring and penalties keep industries in line.</span></li>
+        <li><strong>Protects health and ecosystems</strong><span>Cleaner water means fewer health risks for people and wildlife.</span></li>
+        <li><strong>Builds on existing systems</strong><span>It grows from the plants and sewers already in place.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id="act">
+    <div class="wrap">
+      <div class="heading">
+        <p class="overline">Making Solution 2 work</p>
         <h2 class="h2">Fixing the river takes two levels of action</h2>
       </div>
       <div class="grid-2">
         <div class="steps-card gov">
-          <p class="overline">Government and industry</p>
-          <h3 class="h3">Stop pollution at the source</h3>
+          <p class="overline">Government and water companies</p>
+          <h3 class="h3">Treat it and enforce it</h3>
           <ol class="steps">
-            <li><div><strong>Sewers and treatment</strong><span>Connect riverside homes and treat wastewater before it reaches the river.</span></div></li>
-            <li><div><strong>Enforce discharge rules</strong><span>Take consistent action against illegal discharges.</span></div></li>
-            <li><div><strong>Better waste collection</strong><span>Improve garbage collection and recycling.</span></div></li>
-            <li><div><strong>Clean the tributaries</strong><span>Clean esteros and tributaries, not just the main river.</span></div></li>
+            <li><div><strong>Connect more homes to sewers</strong><span>Only about 15% of NCR’s water-served population is connected to a sewer.</span></div></li>
+            <li><div><strong>Expand treatment plants</strong><span>Build and upgrade plants to clean more wastewater.</span></div></li>
+            <li><div><strong>Enforce discharge rules</strong><span>Test factory wastewater and penalize illegal dumping.</span></div></li>
+            <li><div><strong>Keep trash out of the system</strong><span>Stop garbage before it clogs drains and treatment plants.</span></div></li>
             <li><div><strong>Monitor and publish</strong><span>Test water quality regularly and share the results publicly.</span></div></li>
           </ol>
+          <p class="you-note"><strong>Not just a choice, it’s an order:</strong> Since 2008, a Supreme Court order has required agencies to clean up Manila Bay and its rivers, including the Pasig.</p>
         </div>
         <div class="steps-card you">
           <p class="overline">You</p>
           <h3 class="h3">What you can do</h3>
           <ol class="steps">
-            <li><div><strong>Cut single-use plastic</strong><span>Bring reusable bags, bottles, and containers.</span></div></li>
-            <li><div><strong>Segregate your waste</strong><span>Separate biodegradable, recyclable, and residual waste.</span></div></li>
-            <li><div><strong>Keep drains clear</strong><span>Never throw litter into canals or storm drains.</span></div></li>
-            <li><div><strong>Join a cleanup</strong><span>Volunteer with your barangay, school, or a local group.</span></div></li>
+            <li><div><strong>Bottle your cooking oil</strong><span>Pour cooled oil into a bottle and trash it, not the sink.</span></div></li>
+            <li><div><strong>Save water at home</strong><span>Shorter showers and fixed leaks mean less wastewater.</span></div></li>
+            <li><div><strong>Keep drains clear</strong><span>Never throw trash into canals or storm drains.</span></div></li>
+            <li><div><strong>Report illegal discharges</strong><span>Tell your barangay or the DENR about wastewater dumping.</span></div></li>
             <li><div><strong>Learn and share</strong><span>Share sourced facts, like the ones on this site.</span></div></li>
           </ol>
+          <p class="you-note"><strong>Not near the Pasig River?</strong> These habits still help. Every drain leads to a river or the sea, so cleaner water at home means cleaner waterways wherever you live.</p>
         </div>
       </div>
     </div>
@@ -481,7 +690,7 @@
   <section class="sources-section">
     <div class="wrap">
       <details class="sources">
-        <summary><span><span class="t">Sources</span><span class="c">(18)</span></span><svg width="20" height="20" aria-hidden="true"><use href="#chev"/></svg></summary>
+        <summary><span><span class="t">Sources</span><span class="c">(26)</span></span><svg width="20" height="20" aria-hidden="true"><use href="#chev"/></svg></summary>
         <ol class="src-list" data-list="river"></ol>
       </details>
     </div>
@@ -500,16 +709,17 @@
     </div>
     <div class="col footer-help">
       <p class="overline">Ways to help</p>
-      <p>Reduce single-use plastic</p><p>Segregate your waste</p><p>Keep drains clear</p><p>Join a cleanup</p><p>Learn and share</p>
+      <p>Bottle your cooking oil</p><p>Save water at home</p><p>Keep drains clear</p><p>Report illegal discharges</p><p>Learn and share</p>
     </div>
-    <div class="col footer-cta" hidden>
+    <div class="col footer-cta">
       <p class="footer-cta-title">Keep the hope flowing</p>
-      <p class="dim footer-cta-text">The river’s future is connected to ours. See practical ways to help.</p>
+      <p class="dim footer-cta-text">Cleaner water starts before it reaches the river. See how you can help.</p>
       <a class="btn btn-light" href="#act">What you can do <span aria-hidden="true">→</span></a>
     </div>
   </div>
   <div class="bottom"><div class="wrap">© 2026 Agos Pasig. A student project for GE - A2101, Mapúa Malayan Digital College. Sources are listed on each page.</div></div>
 </footer>
-<script src="assets/js/main.js?v=606bdc54"></script>
+<button type="button" class="to-top" aria-label="Back to top"><svg width="20" height="20" aria-hidden="true"><use href="#chev"/></svg></button>
+<script src="assets/js/main.js?v=e5965b8b"></script>
 </body>
 </html>
