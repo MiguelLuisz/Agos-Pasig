@@ -13,7 +13,7 @@ img{max-width:100%}
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important}}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important}.reveal{opacity:1;transform:none}}
 body{margin:0;background:var(--white);color:var(--text);font-family:var(--body);font-size:16px;line-height:26px;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
 p{margin:0}
@@ -221,10 +221,6 @@ a.find:hover .h3{text-decoration:underline;text-decoration-thickness:2px;text-un
 
 /* Utility and one-off styles */
 /* While the action section is hidden, Sources sits right under the light-blue cards section: match it */
-#act[hidden] + .sources-section{background:var(--sky-50);padding-top:0}
-.foot:has(> .footer-cta[hidden]){grid-template-columns:1fr auto 1fr;column-gap:64px}
-.foot:has(> .footer-cta[hidden]) > .col:first-child{justify-self:start}
-.foot:has(> .footer-cta[hidden]) > .footer-help{justify-self:end}
 .bottom .wrap{text-align:center}
 strong{font-weight:600}
 .svg-defs{position:absolute}
@@ -242,8 +238,102 @@ strong{font-weight:600}
 .footer-blurb{max-width:320px}
 .footer-cta-text{max-width:300px}
 .footer-help{min-width:0}
+
+/* Chapter 4: Solutions */
+.sol-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px;align-items:start}
+.sol .sol-drops{margin-top:auto}
+.sol{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:28px;display:flex;flex-direction:column;gap:16px}
+.sol.featured{border:2px solid var(--blue-700);padding:27px;box-shadow:0 10px 28px rgba(0,79,135,.10)}
+.sol-head{display:flex;gap:16px;align-items:flex-start}
+.sol-num{flex:none;width:40px;height:40px;border-radius:20px;background:var(--blue-700);color:var(--inv);display:grid;place-items:center;font:600 18px/1 var(--display)}
+.sol-tag{font-size:14px;line-height:20px;color:var(--text-2);margin-top:6px}
+.badge{display:inline-block;margin-top:10px;background:var(--good-bg);color:var(--good);font:600 12px/16px var(--body);letter-spacing:1px;text-transform:uppercase;padding:5px 10px;border-radius:999px}
+.sol-facts{margin:0;display:flex;flex-direction:column;gap:20px}
+.sol-facts dt{font:600 13px/16px var(--body);letter-spacing:1.2px;text-transform:uppercase;color:var(--blue-700);margin-bottom:6px}
+.sol-facts dd{margin:0;color:var(--text-2)}
+.facir{border-top:1px solid var(--border);padding-top:14px}
+.sol-drops{display:flex;flex-direction:column;gap:14px;margin-top:4px}
+.facir summary{width:100%;justify-content:space-between}
+.facir summary{cursor:pointer;list-style:none;display:inline-flex;align-items:center;gap:6px;font:600 15px/20px var(--body);color:var(--blue-700)}
+.facir summary::-webkit-details-marker{display:none}
+.facir summary svg{transition:transform .2s}
+.facir[open] summary svg{transform:rotate(180deg)}
+.facir dl{margin:0;display:grid;gap:12px}
+.facir dl div{display:grid;grid-template-columns:132px minmax(0,1fr);gap:12px}
+.facir dt{font-weight:600;color:var(--text)}
+.facir dd{margin:0;color:var(--text-2)}
+.sol .src a{font-weight:600;color:var(--blue-700)}
+.sol .src a:hover{text-decoration:underline}
+
+.compare-wrap{background:var(--white);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.compare{width:100%;border-collapse:collapse;text-align:left}
+.compare th,.compare td{padding:20px 24px;vertical-align:top;border-top:1px solid var(--border)}
+.compare thead th{border-top:0;background:var(--sky-100);font:600 13px/16px var(--body);letter-spacing:1.2px;text-transform:uppercase;color:var(--blue-700)}
+.compare tbody th{width:32%;font:600 18px/26px var(--display);color:var(--text)}
+.compare td{color:var(--text-2)}
+.compare .cmp-num{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:14px;background:var(--blue-700);color:var(--inv);font:600 14px/1 var(--body);margin-right:10px;vertical-align:2px}
+.compare tr.featured th,.compare tr.featured td{background:#eef6ff}
+.compare tr.featured th{box-shadow:inset 4px 0 0 var(--blue-700)}
+.compare .badge{display:table;margin-top:10px;margin-left:38px}
+
+.why-intro{color:var(--inv-muted);margin-top:4px}
+.reasons{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:22px}
+.reasons li{display:grid;grid-template-columns:36px minmax(0,1fr);column-gap:16px;row-gap:4px}
+.reasons li::before{content:"";grid-row:span 2;width:36px;height:36px;border-radius:18px;background:var(--blue-500) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5' fill='none' stroke='white' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/20px no-repeat}
+.reasons strong{font:600 18px/26px var(--body);color:var(--inv)}
+.reasons span{color:var(--inv-muted)}
+
+.grid-4.chapters{grid-template-columns:repeat(4,minmax(0,1fr))}
+.grid-4.chapters .card .img{height:180px}
+
+.sol-key{font:600 20px/28px var(--display);color:var(--blue-700)}
+.sol-sum{color:var(--text-2)}
+.facir-body{margin-top:18px;display:flex;flex-direction:column;gap:20px}
+.facir-body .sol-facts dt{margin-bottom:6px}
+.facir-h{font:600 13px/16px var(--body);letter-spacing:1.2px;text-transform:uppercase;color:var(--blue-700);padding-top:18px;border-top:1px dashed var(--border)}
+
+/* Line up card bottoms: links and sources sit at the bottom of every card */
+.card .body{flex:1}
+.card .body .more,.card .body .src{margin-top:auto}
+
+.facir-close{align-self:flex-start;display:inline-flex;align-items:center;gap:6px;margin-top:4px;padding:8px 14px;border:1px solid var(--border);border-radius:999px;background:var(--white);font:600 15px/20px var(--body);color:var(--blue-700);cursor:pointer;transition:background .15s,border-color .15s}
+.facir-close:hover{background:var(--sky-100);border-color:var(--blue-500)}
+.facir-close svg{transform:rotate(180deg)}
+
+/* Chevron icons take their color from the surrounding text */
+details.sources summary svg{color:var(--blue-700)}
+
+footer{border-top:1px solid var(--navy-800)}
+
+/* Sources sit close under the action section */
+#act + .sources-section{padding-top:0}
+
+/* Note at the end of the "What you can do" card */
+.you-note{margin-top:24px;padding:16px 20px;border-left:3px solid var(--blue-700);background:var(--white);border-radius:8px;color:var(--text-2);font-size:15px;line-height:24px}
+.you-note strong{color:var(--text)}
+.steps-card.gov .you-note{background:var(--sky-100)}
+.steps-card{display:flex;flex-direction:column}
+.steps-card .steps{margin-bottom:24px}
+.steps-card .you-note{margin-top:auto}
+
+/* Reading progress bar (bottom edge of the nav) */
+.progress{position:absolute;left:0;right:0;bottom:-3px;height:3px;pointer-events:none;z-index:30}
+.progress span{display:block;height:100%;width:100%;background:var(--blue-500);transform:scaleX(0);transform-origin:left;transition:transform .1s linear}
+
+/* Back to top */
+.to-top{position:fixed;right:24px;bottom:24px;z-index:30;width:48px;height:48px;border-radius:50%;border:0;display:grid;place-items:center;background:var(--blue-700);color:var(--white);box-shadow:0 6px 20px rgba(7,26,44,.25);cursor:pointer;opacity:0;visibility:hidden;transform:translateY(12px);transition:opacity .25s,transform .25s,visibility .25s,background .2s}
+.to-top svg{transform:rotate(180deg)}
+.to-top.show{opacity:1;visibility:visible;transform:none}
+.to-top:hover{background:var(--navy-800)}
+.to-top:focus-visible{outline:3px solid var(--blue-500);outline-offset:3px}
+
+/* Fade sections in as you scroll */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+[tabindex="-1"]:focus{outline:none}
+
 /* Responsive */
-@media (max-width:1100px){.foot,.foot:has(> .footer-cta[hidden]){grid-template-columns:1fr 1fr;gap:40px 48px}.foot:has(> .footer-cta[hidden]) > .footer-help{justify-self:start}}
+@media (max-width:1100px){.foot{grid-template-columns:1fr 1fr;gap:40px 48px}}
 @media (max-width:1100px){
   :root{--gutter:48px}
   .grid-4{grid-template-columns:repeat(2,1fr)}
@@ -275,7 +365,7 @@ strong{font-weight:600}
   .fx{grid-template-columns:1fr;gap:8px;padding-block:20px}
   .fx .k{font-size:20px;line-height:28px} .fx .s{grid-column:auto}
   .grid-4.team{gap:32px}
-  .foot,.foot:has(> .footer-cta[hidden]){grid-template-columns:1fr;gap:40px;padding-top:56px}
+  .foot{grid-template-columns:1fr;gap:40px;padding-top:56px}
   [id]{scroll-margin-top:130px}
 }
 
@@ -290,3 +380,24 @@ strong{font-weight:600}
 .lqip-riverrecycle-floating-barrier{background-image:url(data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAACwAwCdASoUAAoAPu1kqk2ppaQiMAgBMB2JZwAAW+/EZ5QM2P7jIAD+eRwtyCyOENmIMn2CxlW2NWsNzLJx56FfOuLFrdlTgAA=)}
 .lqip-workers-clearing-river-boom{background-image:url(data:image/webp;base64,UklGRnQAAABXRUJQVlA4IGgAAAAwBQCdASoUABQAPu1urlKppiQiqAgBMB2JYwDGQBElZr9QgQ2FZhX7cucMh2X7ehWZYAD+2mKzMTtb1LAUlSC+VzlMRZF58LnusaO1HTC+TsDISkVqpUUq04mUntprWfFqNI6UEAAAAA==)}
 .lqip-cleanup-crew-bagging-plastic{background-image:url(data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAACwAwCdASoUAA4APu1oqk6ppiQiMAgBMB2JQBOkERgiZVaDbE0sQAD+FlN38aEttYn49xAIS+Wk6oqoXhs5hc3oiQM5An6m9zcoBsWRQL//pcPCzgAAAA==)}
+
+@media (max-width:1100px){
+  .grid-4.chapters{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .grid-4.chapters .card .img{height:216px}
+}
+@media (max-width:820px){
+  .sol-grid{grid-template-columns:1fr;gap:16px}
+  .sol,.sol.featured{padding:20px}
+  .facir dl div{grid-template-columns:1fr;gap:2px}
+  .compare thead{display:none}
+  .compare,.compare tbody,.compare tr,.compare th,.compare td{display:block;width:auto}
+  .compare tr{border-top:1px solid var(--border);padding:18px 20px}
+  .compare tr:first-child{border-top:0}
+  .compare th,.compare td{padding:0;border:0;background:none!important;box-shadow:none!important}
+  .compare tbody th{width:auto;margin-bottom:12px}
+  .compare td{margin-top:10px}
+  .compare td::before{content:attr(data-label);display:block;font:600 12px/16px var(--body);letter-spacing:1.2px;text-transform:uppercase;color:var(--blue-700);margin-bottom:4px}
+  .compare tr.featured{background:#eef6ff;box-shadow:inset 4px 0 0 var(--blue-700)}
+  .reasons{gap:18px}
+}
+@media (max-width:600px){ .grid-4.chapters{grid-template-columns:1fr} }
