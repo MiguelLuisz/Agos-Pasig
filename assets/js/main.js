@@ -32,40 +32,31 @@
     ["Villanueva, J. D., Le Coustumer, P., Huneau, F., Motelica-Heino, M., Perez, T. R., Materum, R., Espaldon, M. V. O., & Stoll, S. (2013). Assessment of trace metals during episodic events using DGT passive sampler: A proposal for water management enhancement. Water Resources Management, 27(12), 4163–4181.", "https://doi.org/10.1007/s11269-013-0401-5"]
   ];
 
-  function fillSources(list, items) {
-    if (!list) return;
-    items.forEach(function (item) {
-      var li = document.createElement('li');
-      var a = document.createElement('a');
-      li.appendChild(document.createTextNode(item[0] + ' '));
-      a.href = item[1];
-      a.target = '_blank';
-      a.rel = 'noopener';
-      a.textContent = item[1];
-      li.appendChild(a);
-      list.appendChild(li);
-    });
-  }
-  fillSources(document.querySelector('[data-list="river"]'), SOURCES);
-  fillSources(document.querySelector('[data-list="home"]'), SOURCES.filter(function (s) { return s[2] === 'home'; }));
 
   /* ---------- Elements ---------- */
   var home = document.getElementById('page-home');
   var river = document.getElementById('page-river');
+  var advocacy = document.getElementById('page-advocacy');
   var aboutEl = document.getElementById('about');
   var nav = document.querySelector('.nav');
   var links = document.getElementById('nav-links');
   var menuBtn = document.getElementById('menu-btn');
-  var bar = document.querySelector('.chapbar .wrap');
-  var fadeL = document.querySelector('.chapbar .fade.l');
-  var fadeR = document.querySelector('.chapbar .fade.r');
   var RIVER_IDS = ['river', 'ch1', 'ch2', 'ch3', 'ch4', 'sustainable', 'act'];
-  var CHAPTERS = ['ch1', 'ch2', 'ch3', 'ch4'];
+  var ADV_IDS = ['advocacy', 'adv-goals', 'adv-take', 'adv-action', 'adv-cta'];
+  var PAGES = [
+    { key: 'home', el: home, ids: [], chapters: [] },
+    { key: 'river', el: river, ids: RIVER_IDS, chapters: ['ch1', 'ch2', 'ch3', 'ch4'] },
+    { key: 'advocacy', el: advocacy, ids: ADV_IDS, chapters: ['adv-goals', 'adv-take', 'adv-action'] }
+  ];
 
   function isShown(el) { return !!el && !el.hidden; }
+  function currentPage() {
+    for (var i = 0; i < PAGES.length; i++) if (!PAGES[i].el.hidden) return PAGES[i];
+    return PAGES[0];
+  }
 
-  function setActive(selector, attr, key) {
-    document.querySelectorAll(selector).forEach(function (el) {
+  function setActive(selector, attr, key, scope) {
+    (scope || document).querySelectorAll(selector).forEach(function (el) {
       var on = el.getAttribute(attr) === key;
       el.classList.toggle('active', on);
       if (on) el.setAttribute('aria-current', 'true'); else el.removeAttribute('aria-current');
@@ -77,23 +68,23 @@
     menuBtn.setAttribute('aria-expanded', 'false');
   }
 
-  /* ---------- Page switching (Home / The River) ---------- */
+  /* ---------- Page switching (Home / The River / Advocacy) ---------- */
   function route() {
     var hash = (location.hash || '#home').slice(1);
-    var onRiver = RIVER_IDS.indexOf(hash) > -1;
-    var switching = river.hidden === onRiver;   // true when the visible page changes
-    home.hidden = onRiver;
-    river.hidden = !onRiver;
-    setActive('[data-nav]', 'data-nav', onRiver ? 'river' : (hash === 'about' ? 'about' : 'home'));
+    var page = PAGES[0];
+    PAGES.forEach(function (p) { if (p.ids.indexOf(hash) > -1) page = p; });
+    var switching = page.el.hidden;   // true when the visible page changes
+    PAGES.forEach(function (p) { p.el.hidden = p !== page; });
+    setActive('[data-nav]', 'data-nav', page.key === 'home' ? (hash === 'about' ? 'about' : 'home') : page.key);
     closeMenu();
 
-    var target = (hash === 'home' || hash === 'river') ? null : document.getElementById(hash);
+    var target = (hash === 'home' || page.ids[0] === hash) ? null : document.getElementById(hash);
     var behavior = switching ? 'instant' : 'smooth';
     if (isShown(target)) target.scrollIntoView({ behavior: behavior, block: 'start' });
     else window.scrollTo({ top: 0, behavior: behavior });
 
     currentChapter = undefined;
-    setTimeout(updateHighlights, 60);
+    setTimeout(function () { updateAllFades(); updateHighlights(); }, 60);
   }
 
   /* ---------- Scroll highlights ---------- */
@@ -106,19 +97,21 @@
     setActive('[data-nav]', 'data-nav', key);
   }
 
-  // The River: light up the chip for the chapter on screen
+  // The River and Advocacy: light up the chip for the part on screen
   function chapterHighlight() {
-    if (river.hidden) return;
+    var page = currentPage();
+    if (!page.chapters.length) return;
+    var bar = page.el.querySelector('.chapbar .wrap');
     var line = bar.getBoundingClientRect().bottom + 120;
     var cur = null;
-    CHAPTERS.forEach(function (id) {
+    page.chapters.forEach(function (id) {
       var el = document.getElementById(id);
       if (isShown(el) && el.getBoundingClientRect().top <= line) cur = id;
     });
     if (cur === currentChapter) return;
     currentChapter = cur;
-    setActive('[data-chip]', 'data-chip', cur);
-    scrollChipIntoView(cur && bar.querySelector('[data-chip="' + cur + '"]'));
+    setActive('[data-chip]', 'data-chip', cur, page.el);
+    scrollChipIntoView(bar, cur && bar.querySelector('[data-chip="' + cur + '"]'));
   }
 
   function updateHighlights() {
@@ -133,14 +126,42 @@
     requestAnimationFrame(function () { ticking = false; updateHighlights(); });
   }, { passive: true });
 
-  /* ---------- Chapter bar: swipe, drag, wheel, edge fades ---------- */
-  function updateFades() {
-    var max = bar.scrollWidth - bar.clientWidth;
-    fadeL.classList.toggle('on', bar.scrollLeft > 4);
-    fadeR.classList.toggle('on', bar.scrollLeft < max - 4);
+  /* ---------- Sources lists ---------- */
+  function fillSources(list, items) {
+    if (!list) return;
+    items.forEach(function (item) {
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      li.appendChild(document.createTextNode(item[0] + ' '));
+      a.href = item[1];
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.textContent = item[1];
+      li.appendChild(a);
+      list.appendChild(li);
+    });
   }
+  var ADV_SOURCES = [
+    'https://www.adb.org/results/country-water-action-resuscitating-pasig-river',
+    'https://ncr.denr.gov.ph/wp-content/uploads/2026/01/ANNUAL-REPORT-2025.pdf',
+    'https://denr.gov.ph/?p=390',
+    'https://www.philstar.com/nation/2025/09/28/2475895/pcg-tributaries-main-contributor-pasig-river-pollution'
+  ];
+  fillSources(document.querySelector('[data-list="river"]'), SOURCES);
+  fillSources(document.querySelector('[data-list="home"]'), SOURCES.filter(function (s) { return s[2] === 'home'; }));
+  fillSources(document.querySelector('[data-list="advocacy"]'), SOURCES.filter(function (s) { return ADV_SOURCES.indexOf(s[1]) > -1; }));
 
-  function scrollChipIntoView(chip) {
+  /* ---------- Chapter bars: swipe, drag, wheel, edge fades ---------- */
+  var bars = [];
+  function updateFades(bar) {
+    var wrap = bar.parentNode;
+    var max = bar.scrollWidth - bar.clientWidth;
+    wrap.querySelector('.fade.l').classList.toggle('on', bar.scrollLeft > 4);
+    wrap.querySelector('.fade.r').classList.toggle('on', bar.scrollLeft < max - 4);
+  }
+  function updateAllFades() { bars.forEach(updateFades); }
+
+  function scrollChipIntoView(bar, chip) {
     if (!chip) return;
     var b = bar.getBoundingClientRect();
     var c = chip.getBoundingClientRect();
@@ -150,38 +171,82 @@
     }
   }
 
-  bar.addEventListener('scroll', updateFades, { passive: true });
-  window.addEventListener('resize', updateFades);
+  document.querySelectorAll('.chapbar .wrap').forEach(function (bar) {
+    bars.push(bar);
+    bar.addEventListener('scroll', function () { updateFades(bar); }, { passive: true });
 
-  // Mouse wheel scrolls the row sideways when it overflows
-  bar.addEventListener('wheel', function (e) {
-    if (bar.scrollWidth > bar.clientWidth && Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-      bar.scrollLeft += e.deltaY;
-      e.preventDefault();
+    // Mouse wheel scrolls the row sideways when it overflows
+    bar.addEventListener('wheel', function (e) {
+      if (bar.scrollWidth > bar.clientWidth && Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+        bar.scrollLeft += e.deltaY;
+        e.preventDefault();
+      }
+    }, { passive: false });
+
+    // Click-and-drag with a mouse (touch uses native swiping)
+    var dragging = false, dragged = false, startX = 0, startScroll = 0;
+    bar.addEventListener('pointerdown', function (e) {
+      if (e.pointerType !== 'mouse') return;
+      dragging = true; dragged = false;
+      startX = e.clientX; startScroll = bar.scrollLeft;
+    });
+    window.addEventListener('pointermove', function (e) {
+      if (!dragging) return;
+      var dx = e.clientX - startX;
+      if (Math.abs(dx) > 5) { dragged = true; bar.classList.add('dragging'); }
+      bar.scrollLeft = startScroll - dx;
+    });
+    window.addEventListener('pointerup', function () {
+      dragging = false;
+      setTimeout(function () { bar.classList.remove('dragging'); }, 0);
+    });
+    // A drag should not count as a click on a chip
+    bar.addEventListener('click', function (e) {
+      if (dragged) { e.preventDefault(); dragged = false; }
+    }, true);
+  });
+  window.addEventListener('resize', updateAllFades);
+
+  /* ---------- Advocacy: habit checklist and share button ---------- */
+  var habits = document.querySelectorAll('.habit');
+  var countEl = document.querySelector('.pledge-count b');
+  var msgEl = document.querySelector('.pledge-msg');
+  function updatePledge() {
+    var n = document.querySelectorAll('.habit[aria-pressed="true"]').length;
+    countEl.textContent = n;
+    msgEl.textContent = n === 0 ? 'Tap a habit above to start.'
+      : n < 4 ? 'Good start. Small habits add up.'
+      : n < habits.length ? 'Nice! Share this page so others can pick theirs.'
+      : 'All 12. You’re keeping the hope flowing!';
+  }
+  habits.forEach(function (h) {
+    h.addEventListener('click', function () {
+      h.setAttribute('aria-pressed', String(h.getAttribute('aria-pressed') !== 'true'));
+      updatePledge();
+    });
+  });
+
+  document.querySelectorAll('.mf').forEach(function (card) {
+    card.addEventListener('click', function () {
+      card.setAttribute('aria-pressed', String(card.getAttribute('aria-pressed') !== 'true'));
+    });
+  });
+
+  var SHARE_URL = 'https://miguelluisz.github.io/Agos-Pasig/#advocacy';
+  var shareBtn = document.querySelector('.share-btn');
+  var shareNote = document.querySelector('.share-note');
+  if (shareBtn) shareBtn.addEventListener('click', function () {
+    var data = { title: 'Agos Pasig', text: 'Every drain leads to a river. See what you can do for the Pasig River.', url: SHARE_URL };
+    if (navigator.share) {
+      navigator.share(data).catch(function () {});
+    } else if (navigator.clipboard) {
+      navigator.clipboard.writeText(SHARE_URL).then(function () {
+        shareNote.textContent = 'Link copied. Paste it anywhere to share.';
+      }, function () { shareNote.textContent = 'Share this link: ' + SHARE_URL; });
+    } else {
+      shareNote.textContent = 'Share this link: ' + SHARE_URL;
     }
-  }, { passive: false });
-
-  // Click-and-drag with a mouse (touch uses native swiping)
-  var dragging = false, dragged = false, startX = 0, startScroll = 0;
-  bar.addEventListener('pointerdown', function (e) {
-    if (e.pointerType !== 'mouse') return;
-    dragging = true; dragged = false;
-    startX = e.clientX; startScroll = bar.scrollLeft;
   });
-  window.addEventListener('pointermove', function (e) {
-    if (!dragging) return;
-    var dx = e.clientX - startX;
-    if (Math.abs(dx) > 5) { dragged = true; bar.classList.add('dragging'); }
-    bar.scrollLeft = startScroll - dx;
-  });
-  window.addEventListener('pointerup', function () {
-    dragging = false;
-    setTimeout(function () { bar.classList.remove('dragging'); }, 0);
-  });
-  // A drag should not count as a click on a chip
-  bar.addEventListener('click', function (e) {
-    if (dragged) { e.preventDefault(); dragged = false; }
-  }, true);
 
   /* ---------- Menu and links ---------- */
   menuBtn.addEventListener('click', function () {
@@ -266,7 +331,7 @@
   /* ---------- Fade sections in as they scroll into view ---------- */
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if ('IntersectionObserver' in window && !reduceMotion) {
-    var revealEls = document.querySelectorAll('main .heading, main .grid-2 > *, main .grid-3 > *, main .grid-4 > *, main .sol-grid > *, main .split > *, main .compare-wrap, main .map, main .video');
+    var revealEls = document.querySelectorAll('main .heading, main .grid-2 > *, main .grid-3 > *, main .grid-4 > *, main .sol-grid > *, main .split > *, main .compare-wrap, main .map, main .video, main .flow, main .conclusion, main .adv-teaser');
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
         if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
@@ -283,7 +348,7 @@
 
   /* ---------- Start ---------- */
   route();
-  updateFades();
+  updateAllFades();
   equalizeSolutions();
   onProgress();
   setTimeout(updateHighlights, 150);
